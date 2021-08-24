@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div class="about">
     <Header />
-    <h1>This is the login page</h1>
+    <h1>This is the account page</h1>
   </div>
 </template>
 

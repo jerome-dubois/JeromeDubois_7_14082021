@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div class="public-profile">
     <Header />
-    <h1>This is the login page</h1>
+    <h1>This is the page with user posts</h1>
   </div>
 </template>
 
