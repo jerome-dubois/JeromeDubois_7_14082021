@@ -5,9 +5,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/signup',
-    name: 'Signup',
-    component: () => import('../views/Signup.vue')
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
   },
   {
     path: '/login',
@@ -25,8 +25,8 @@ const routes = [
     component: () => import('../views/Account.vue')
   },
   {
-    path: '/userpublicprofile',
-    name: 'UserPublicProfile',
+    path: '/userposts',
+    name: 'UserPosts',
     component: () => import('../views/UserPosts.vue')
   }
 ]

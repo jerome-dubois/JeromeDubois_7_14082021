@@ -10,7 +10,7 @@ const auth = require('../middleware/auth');
 // Import du middleware de téléchargement des fichiers
 const multer = require('../middleware/multer-config');
 
-// Import du controller sauces.js avec déclaration de saucesCtrl
+// Import du controller posts.js avec déclaration de postsCtrl
 const postsCtrl = require('../controllers/posts');
 
 // Implémentation des différentes routes des posts avec, pour chaque route, authentification et configuration de la logique métier appropriée:

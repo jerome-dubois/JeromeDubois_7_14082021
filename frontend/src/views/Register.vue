@@ -1,7 +1,7 @@
 <template>
-  <div class="signup">
+  <div class="register">
     <Header />
-    <h1>This is the signup page</h1>
+    <h1>This is the register page</h1>
   </div>
 </template>
 
