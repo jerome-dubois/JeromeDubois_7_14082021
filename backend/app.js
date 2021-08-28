@@ -100,14 +100,6 @@ app.use(helmet());
 // Désactivation de la mise en cache sur le navigateur pour limiter le risque d'attaque de sessions
 app.use(nocache());
 
-// Remplace tous les caractères interdits dans les clés
-// Or, to replace prohibited characters with _, use:
-// app.use(
-//   mongoSanitize({
-//     replaceWith: '_',
-//   }),
-// );
-
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Implémentation des routes dans l'application en définisant les chemins de base d'enregistrement du routeur qui s'appliquent pour les différentes routes définies dans posts et user
