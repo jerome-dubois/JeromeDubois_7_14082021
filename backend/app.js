@@ -3,10 +3,6 @@ const express = require('express');
 /* Afin de lire les données HTTP POST, nous devons utiliser le module "body-parser". body-parser est un middleware express qui lit l'entrée d'un formulaire et le stocke en tant qu'objet javascript accessible via req.body */
 const bodyParser = require('body-parser');
 
-/* A remplacer par un nouveau modèle de données adapté à MySql */
-/* Déclaration du plugin Mongoose pour la modélisation des données sous forme de schéma pour MongoDB*/
-// const mongoose = require('mongoose');
-
 /* Le module de chemin d'accès path fournit des utilitaires pour travailler avec les chemins de fichiers et de répertoires. Permet d'accéder au path de notre serveur*/
 const path = require('path');
 
@@ -17,21 +13,6 @@ const helmet = require("helmet");
 
 // Ce middleware Express définit des en-têtes de réponse HTTP pour essayer de désactiver la mise en cache côté client.
 const nocache = require("nocache");
-
-
-/* Middleware pour MongoDB à remplacer */
-
-/* Middleware d'Express 4.x qui nettoie les données fournies par l'utilisateur pour empêcher l'injection d'opérateur MongoDB.
-Ce module recherche toutes les clés dans les objets commençant par un signe $ ou contenant un .,
-à partir de req.body, req.query ou req.params. Il peut alors soit :
-
-- supprimer complètement ces clés et les données associées de l'objet, ou
-- remplacer les caractères interdits par un autre caractère autorisé (choix fait ici avec _).
-
-Le comportement est régi par l'option passée, replaceWith. Définissez cette option pour que le désinfectant remplace les caractères interdits par le caractère transmis.
-
-*/
-// const mongoSanitize = require('express-mongo-sanitize');
 
 /* Déclaration du module Node.js permettant d'utiliser les cookies de manière sécurisée
 Ressource: https://www.npmjs.com/package/express-session*/
@@ -47,24 +28,6 @@ Cela permet de masquer les paramétres de connexion à la base de données
 de l'application The Twelve-Factor.)
 Ressource: https://www.npmjs.com/package/dotenv */
 require('dotenv').config();
-
-/* Connection à la base de données en mode administrateur restreint pour éditer le contenu de la base de données 
-(lecture et écriture) via les variables d'environnement DB_ADMIN et DB_PASS_ADMIN définiées dans le fichier .env*/
-
-/*mongoose.connect(`mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASS_ADMIN}@cluster0.xolsv.mongodb.net/dataBasePekocko?retryWrites=true&w=majority`,
-   { useCreateIndex: true,
-     useNewUrlParser: true,
-     useUnifiedTopology: true })
-   .then(() => console.log('Connexion à MongoDB réussie !'))
-   .catch(() => console.log('Connexion à MongoDB échouée !'));*/
-
-// Connection à la base de données en mode super administrateur pour modifier et supprimer le contenu de la base de données via les variables d'environnement DB_SUPERADMIN et DB_PASS_SUPERADMIN définiées dans le fichier .env
-// mongoose.connect(`mongodb+srv://${process.env.DB_SUPERADMIN}:${process.env.DB_PASS_SUPERADMIN}@cluster0.xolsv.mongodb.net/dataBasePekocko?retryWrites=true&w=majority`,
-//   { useCreateIndex: true,
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true })
-//   .then(() => console.log('Connexion à MongoDB réussie !'))
-//   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 
