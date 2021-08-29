@@ -9,10 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
       },
       contentPost: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       imageUrl: {
         type: Sequelize.STRING

@@ -11,16 +11,35 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Post, {
+        foreignKey: 'userId'
+      });
+      // User.hasMany(models.Post);
     }
   };
   User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
+    firstName: {
+      DataTypes.STRING,
+      allowNull: false,
+			required: true
+    },
+    lastName: {
+      DataTypes.STRING,
+      allowNull: false,
+			required: true
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      required: true
+    },
     password: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
+    allowNull: false,
+		required: true
   });
   return User;
 };
