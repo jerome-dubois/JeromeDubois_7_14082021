@@ -59,12 +59,12 @@ require('dotenv').config();
    .catch(() => console.log('Connexion à MongoDB échouée !'));*/
 
 // Connection à la base de données en mode super administrateur pour modifier et supprimer le contenu de la base de données via les variables d'environnement DB_SUPERADMIN et DB_PASS_SUPERADMIN définiées dans le fichier .env
-mongoose.connect(`mongodb+srv://${process.env.DB_SUPERADMIN}:${process.env.DB_PASS_SUPERADMIN}@cluster0.xolsv.mongodb.net/dataBasePekocko?retryWrites=true&w=majority`,
-  { useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+// mongoose.connect(`mongodb+srv://${process.env.DB_SUPERADMIN}:${process.env.DB_PASS_SUPERADMIN}@cluster0.xolsv.mongodb.net/dataBasePekocko?retryWrites=true&w=majority`,
+//   { useCreateIndex: true,
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true })
+//   .then(() => console.log('Connexion à MongoDB réussie !'))
+//   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 

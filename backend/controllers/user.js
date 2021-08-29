@@ -1,3 +1,9 @@
+// Import du schéma de données User défini comme modèles définis via Sequelize
+
+const db = require('../models');
+const Sequelize = db.Sequelize;
+const { User } = db.sequelize.models;
+
 // Import du package de chiffrement bcrypt
 const bcrypt = require('bcrypt');
 
@@ -7,16 +13,13 @@ const CryptoJS = require("crypto-js");
 // Import du package pour pouvoir créer et vérifier les tokens d'authentification
 const jwt = require('jsonwebtoken');
 
-// Import du schéma de données User
-const User = require('../models/User');
-
 require('dotenv').config();
 
 // Définition et export des différentes logiques métier correspondant à chacune des routes
 
 // Définition et export de la logique métier de la route post qui chiffre le mot de passe de l'utilisateur,
 // ajoute l'utilisateur à la base de données
-exports.signup = (req, res, next) => {
+exports.register = (req, res, next) => {
     const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/;
     
     if (!emailRegex.test(req.body.email)) {
