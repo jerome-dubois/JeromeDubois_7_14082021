@@ -15,6 +15,7 @@ module.exports = {
           model: 'Users',
           key: 'id',
           as: 'userId'
+        }
       },
       contentPost: {
         type: Sequelize.TEXT
