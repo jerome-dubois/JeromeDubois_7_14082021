@@ -8,20 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'userId'
-        }
-      },
       contentPost: {
         type: Sequelize.TEXT
       },
       imageUrl: {
         type: Sequelize.STRING
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: 'Users',
+          key: 'id', 
+          as: 'userId'
+        }
       },
       createdAt: {
         allowNull: false,
