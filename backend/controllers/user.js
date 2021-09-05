@@ -1,7 +1,6 @@
-// Import du schéma de données User défini comme modèles définis via Sequelize
+// Import du schéma de données User défini comme modèle via Sequelize
 
 const db = require('../models');
-const Sequelize = db.Sequelize;
 const { User } = db.sequelize.models;
 
 // Import du package de chiffrement bcrypt

@@ -1,3 +1,8 @@
+// Import du schéma de données User défini comme modèle via Sequelize
+
+// const db = require('../../models');
+// const { User } = db.sequelize.models;
+
 // Import du package pour pouvoir créer et vérifier les tokens d'authentification
 const jwt = require('jsonwebtoken');
 

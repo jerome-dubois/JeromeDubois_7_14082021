@@ -29,3 +29,6 @@ router.put('/:id', auth, multer, postsCtrl.modifyPost);
 
 // Supprime la sauce avec l'ID fourni.
 router.delete('/:id', auth, postsCtrl.deletePost);
+
+// Enregistrement des différentes routes dans le routeur Express
+module.exports = router;

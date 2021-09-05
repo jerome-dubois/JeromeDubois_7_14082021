@@ -1,7 +1,6 @@
-// Import du schéma de données User défini comme modèles définis via Sequelize
+// Import du schéma de données Post défini comme modèle via Sequelize
 
 const db = require('../models');
-const Sequelize = db.Sequelize;
 const { Post } = db.sequelize.models;
 
 // Import de 'file system' de Node pour la gestion des fichiers (dont le téléchargement)
