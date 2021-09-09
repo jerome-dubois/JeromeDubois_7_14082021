@@ -13,7 +13,8 @@
 
 <script>
 // @ is an alias to /src
-import AllPosts from '@/components/AllPosts.vue'
+import AllPosts from '@/components/AllPosts.vue';
+import axios from "axios";
 
 export default {
   name: 'SelectedUserAccount',
