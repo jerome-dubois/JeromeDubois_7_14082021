@@ -7,7 +7,7 @@ const { User } = db.sequelize.models;
 const bcrypt = require('bcrypt');
 
 // Import de la bibliothèque JavaScript de normes cryptographiques crypto-js
-const CryptoJS = require("crypto-js");
+// const CryptoJS = require("crypto-js");
 
 // Import du package pour pouvoir créer et vérifier les tokens d'authentification
 const jwt = require('jsonwebtoken');
@@ -27,11 +27,13 @@ exports.register = (req, res, next) => {
         bcrypt.hash(req.body.password, 10)
         .then(hash => {
             // Masquage de l'email avec la librairie crypto-js par chiffrement avec la méthode HmacSHA512
-            const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
-            console.log(emailCryptoJs); 
+            // const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
+            // console.log(emailCryptoJs); 
             // Création du nouvel utilisateur avec l'email masqué et le mot de passe haché
             const user = new User({
-                email: emailCryptoJs,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
                 password: hash
             });
             user.save()
@@ -46,9 +48,9 @@ exports.register = (req, res, next) => {
 // Définition et export de la logique métier de la route post qui vérifie les informations d'identification de l'utilisateur, 
 // en renvoyant l'identifiant userID depuis la base de données et un jeton Web JSON signé (contenant également l'identifiant userID)
 exports.login = (req, res, next) => {
-    const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
+    // const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
 
-    User.findOne({ email: emailCryptoJs })
+    User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
                 return res.status(401).json({ error: 'User not found !' })

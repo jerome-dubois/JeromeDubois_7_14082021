@@ -7,9 +7,8 @@
       <b-card-text>
         Créer un compte
       </b-card-text>
-
-      <!-- <b-form @submit="onSubmit" v-if="show"> -->
-      <b-form v-if="show">
+      
+      <b-form>
       
         <b-form-group id="firstName-group" label="Prénom" label-for="firstName">
           <b-form-input
@@ -51,7 +50,12 @@
           ></b-form-input>
         </b-form-group>
       
-        <b-button type="submit" variant="primary">S'inscrire</b-button>
+        <b-button
+          @click.prevent="register"
+          type="submit"
+          variant="primary">
+          <span>S'inscrire</span>
+        </b-button>
 
       </b-form>
 
@@ -83,15 +87,10 @@ export default {
         lastName: '',
         email: '',
         password: ''         
-      },
-      show: true
+      }
     }
   },
   methods: {
-    // onSubmit(event) {
-    //   event.preventDefault()
-    //   alert(JSON.stringify(this.formRegister))
-    // },
     register() {
       if (
         this.formRegister.firstName !== null &&
@@ -108,6 +107,7 @@ export default {
 
       } else {
         alert ("Veuillez saisir la totalité des champs du formulaire");
+        // this.errorMessage = 'Veuillez saisir la totalité des champs du formulaire';
       }
     }   
   }

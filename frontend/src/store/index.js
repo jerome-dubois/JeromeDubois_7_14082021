@@ -7,6 +7,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: {
+      firstName: '',
+      lastName: '',
+      email: 'Nc'
+    }
   },
   mutations: {
   },

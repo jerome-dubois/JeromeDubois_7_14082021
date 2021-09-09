@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h1>This is the account page</h1>
+  <div class="logged-account">
+    <h1>This is the logged account page</h1>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
+  name: 'LoggedAccount',
   components: {
   }
 }

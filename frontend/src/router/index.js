@@ -20,19 +20,24 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/account',
-    name: 'Account',
-    component: () => import('../views/Account.vue')
+    path: '/posts/:postId',
+    name: 'SelectedPost',
+    component: () => import('../views/SelectedPost.vue')
   },
   {
-    path: '/userposts',
-    name: 'UserPosts',
-    component: () => import('../views/UserPosts.vue')
+    path: '/account',
+    name: 'LoggedAccount',
+    component: () => import('../views/LoggedAccount.vue')
+  },
+  {
+    path: '/account/:userId',
+    name: 'SelectedUserAccount',
+    component: () => import('../views/SelectedUserAccount.vue')
   }
-]
+];
 
 const router = new VueRouter({
   routes
-})
+});
 
-export default router
+export default router;

@@ -22,6 +22,8 @@ const session = require('express-session');
 const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 
+const userCtrl = require('./controllers/user');
+
 /* Implémentation du module qui charge les variables d'environnement du fichier .env dans process.env
 Cela permet de masquer les paramétres de connexion à la base de données
 (Le stockage de la configuration dans l'environnement séparé du code est basé sur la méthodologie 
@@ -68,5 +70,9 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 // Implémentation des routes dans l'application en définisant les chemins de base d'enregistrement du routeur qui s'appliquent pour les différentes routes définies dans posts et user
 app.use('/api/posts', postsRoutes);
 app.use('/api/auth', userRoutes);
+
+app.get('/api/users/:id', userCtrl.getOneUser);
+app.get('/api/users', userCtrl.getAllUsers);
+app.delete('/api/users/:id', userCtrl.deleteUserAccount);
 
 module.exports = app;
