@@ -9,13 +9,16 @@ const fs = require('fs');
 // Définition et export des différentes logiques métier correspondant à chacune des routes
 
 // Définition et export de la logique métier appliquée à la route post qui crée le post avec l'ID fourni
+
 exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);    
-    console.log(req.body.post); 
-    delete postObject._id;
+    console.log(req.body);
+    // console.log(JSON.parse(req.body));
+    // const postObject = JSON.parse(req.body);
+    const postObject = req.body;
+    // delete postObject._id;
     const post = new Post({
-        ...postObject,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        ...postObject
+        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     post.save()
         .then(() => res.status(201).json({ message: 'Post registered !'}))
@@ -39,7 +42,7 @@ exports.modifyPost = (req, res, next) => {
         })
     }
 
-    /* Puis, on définit postObject comme une concaténation des valeurs de le post modifiée avec une nouvelle valeur d'url pour la nouvelle image si elle existe sinon on y affecte les nouvelles valeurs de post mais avec la même valeur d'url en cas d'image non modifiée*/
+    /* Puis, on définit postObject comme une concaténation des valeurs du post modifié avec une nouvelle valeur d'url pour la nouvelle image si elle existe sinon on y affecte les nouvelles valeurs de post mais avec la même valeur d'url en cas d'image non modifiée*/
     const postObject = req.file ? {
         ...JSON.parse(req.body.post),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -55,12 +58,12 @@ exports.modifyPost = (req, res, next) => {
 // Définition et export de la logique métier appliquée à la route get qui renvoie le post avec l'ID fourni
 exports.getOnePost = (req, res, next) => {      
     Post.findOne({
-        where: { _id: req.params.id },
-        include: [
-            {
-                model: db.User
-            }          
-        ]
+        where: { id: req.params.id },
+        // include: [
+        //     {
+        //         model: db.User
+        //     }          
+        // ]
         })
         .then(post => res.status(200).json(post))
         .catch(error => res.status(404).json({ error }));
@@ -84,7 +87,7 @@ exports.deletePost = (req, res, next) => {
 
 // Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de toutes les posts dans la base de données 
 exports.getAllPosts = (req, res, next) => {
-    Post.find()
+    Post.findAll()
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };

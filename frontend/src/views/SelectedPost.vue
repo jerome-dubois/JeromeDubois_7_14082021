@@ -4,31 +4,47 @@
 
     <Post v-if="post" :post="post" />
 
+    <b-card-text v-if="post">
+      {{ post }}
+    </b-card-text>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+
 import axios from "axios";
 import Post from '@/components/Post.vue';
 
 export default {
   name: 'SelectedPost',
-  components: {    
+  components: {
     Post
   },
-  methods : {
+  data () {
+    return {
+      post: null
+    }
+  },
+  mounted () {
+    this.displayPost()
+  },
+  methods : {    
     displayPost () {
       axios
-      .get("http://localhost:3000/api/posts/:id")
+      .get(`http://localhost:3000/api/posts/${this.$route.params.postId.substr(1)}`)
       .then(response => {
+        console.log(this.$route.params.postId.substr(1)),
         console.log("post", response.data);
         this.post = response.data;
+        console.log("post", this.post.content);
       })
       .catch(error => {
         console.log(error);
       })
     }    
   }
+
 }
 </script>

@@ -1,9 +1,8 @@
 <template>
-  <div class="home">
-    <h1>This is the all posts component</h1>
-    <b-row >
-      <b-col cols="12" lg="6" v-for="post in allPosts" :key="post.id">
-        <Post :post="post" />
+  <div>
+    <b-row>
+      <b-col >
+        <Post v-for="post in posts" :key="post.id" @postDetails="loadPost"/>
       </b-col>
     </b-row>
 
@@ -19,13 +18,26 @@ export default {
   components: {   
     Post
   },
+  data() {
+    return {
+      post: {
+        id: "",
+        content: "",
+        imageUrl: ""
+      },     
+      posts: []
+    };
+  },
   methods : {
+    loadPost(payload) {
+      this.post = payload.post;
+    },
     displayAllPosts () {
       axios
       .get("http://localhost:3000/api/posts")
       .then(response => {
-        console.log("allPosts", response.data);
-        this.allPosts = response.data;
+        console.log("posts", response.data);
+        this.posts = response.data;
       })
       .catch(error => {
         console.log(error);

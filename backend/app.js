@@ -71,8 +71,8 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/posts', postsRoutes);
 app.use('/api/auth', userRoutes);
 
-app.get('/api/users/:id', userCtrl.getOneUser);
-app.get('/api/users', userCtrl.getAllUsers);
-app.delete('/api/users/:id', userCtrl.deleteUserAccount);
+// app.get('/api/users/:id', userCtrl.getOneUser);
+// app.get('/api/users', userCtrl.getAllUsers);
+// app.delete('/api/users/:id', userCtrl.deleteUserAccount);
 
 module.exports = app;

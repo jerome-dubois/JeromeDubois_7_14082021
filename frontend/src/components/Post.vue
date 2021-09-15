@@ -7,13 +7,13 @@
     <b-card>
       
       <div>
-        <router-link
+        <!-- <router-link
           :to="{ name: 'SelectedUserAccount', params: { userId: post.User.id } }">
           <p>
             {{ post.User.firstName }} {{ post.User.lastName }}
           </p>
         </router-link>
-      </div>
+      </div> -->
 
       <b-card-text v-if="post.content">
           {{ post.content }}
@@ -33,19 +33,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 
 export default {
   name: 'Post',
   components: {},
-  props: {
-    post: {
-      type: Object,
-      required: true
-    }
-  },
-  computed: {
-    ...mapState("user")
-  }
+  props: ['post']
+  // computed: {
+  //   ...mapState("user")
+  // }
 }
 </script>

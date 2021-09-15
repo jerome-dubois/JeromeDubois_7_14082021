@@ -90,6 +90,9 @@ export default {
       }
     }
   },
+  // computed: {
+  //   ...mapState(["user"])
+  // },
   methods: {
     register() {
       if (
