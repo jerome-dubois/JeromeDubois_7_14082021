@@ -75,3 +75,25 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 
 };
+
+// Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de tous les users dans la base de données 
+exports.getAllUsers = (req, res, next) => {
+    User.findAll()
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(400).json({ error }));
+};
+
+// Définition et export de la logique métier appliquée à la route get qui renvoie le post avec l'ID fourni
+exports.getOneUser = (req, res, next) => {      
+    User.findOne({
+        where: { id: req.params.id },
+        // include: [
+        //     {
+        //         model: db.User
+        //     }          
+        // ]
+        })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(404).json({ error }));
+        
+};

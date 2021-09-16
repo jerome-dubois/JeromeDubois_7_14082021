@@ -69,10 +69,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Implémentation des routes dans l'application en définisant les chemins de base d'enregistrement du routeur qui s'appliquent pour les différentes routes définies dans posts et user
 app.use('/api/posts', postsRoutes);
-app.use('/api/auth', userRoutes);
-
-// app.get('/api/users/:id', userCtrl.getOneUser);
-// app.get('/api/users', userCtrl.getAllUsers);
-// app.delete('/api/users/:id', userCtrl.deleteUserAccount);
+app.use('/api', userRoutes);
 
 module.exports = app;
