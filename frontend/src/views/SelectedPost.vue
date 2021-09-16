@@ -4,9 +4,9 @@
 
     <Post v-if="post" :post="post" />
 
-    <b-card-text v-if="post">
+    <!-- <b-card-text v-if="post">
       {{ post }}
-    </b-card-text>
+    </b-card-text> -->
 
   </div>
 </template>
@@ -33,9 +33,9 @@ export default {
   methods : {    
     displayPost () {
       axios
-      .get(`http://localhost:3000/api/posts/${this.$route.params.postId.substr(1)}`)
+      .get(`http://localhost:3000/api/posts/${this.$route.params.postId}`)
       .then(response => {
-        console.log(this.$route.params.postId.substr(1)),
+        console.log(this.$route.params.postId),
         console.log("post", response.data);
         this.post = response.data;
         console.log("post", this.post.content);

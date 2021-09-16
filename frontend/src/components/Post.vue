@@ -6,7 +6,7 @@
 
     <b-card>
       
-      <div>
+      <!-- <div> -->
         <!-- <router-link
           :to="{ name: 'SelectedUserAccount', params: { userId: post.User.id } }">
           <p>

@@ -21,18 +21,28 @@ export default {
   components: {    
     AllPosts
   },
+  data () {
+    return {
+      selectedUserAccount: null
+    }
+  },
+  mounted () {
+    this.loadSelectedUserAccount()
+  },
   methods : {
     loadSelectedUserAccount () {
       axios
-      .get("http://localhost:3000/api/users/:id")
+      .get(`http://localhost:3000/api/users/${this.$route.params.userId}`)
       .then(response => {
-        console.log("selectedUserAccount", response.user);
-        this.selectedUserAccount = response.user;
+        console.log(this.$route.params.userId),
+        console.log("selectedUserAccount", response.data);
+        this.selectedUserAccount = response.data;
+        console.log("selectedUserAccount", this.selectedUserAccount.firstName);
       })
       .catch(error => {
         console.log(error);
       })
     }    
-  }
+  }  
 }
 </script>

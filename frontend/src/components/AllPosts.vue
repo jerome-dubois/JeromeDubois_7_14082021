@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col >
-        <Post v-for="post in posts" :key="post.id" @postDetails="loadPost"/>
+        <Post v-for="post in posts" :key="post.id"/>
       </b-col>
     </b-row>
 
@@ -28,10 +28,13 @@ export default {
       posts: []
     };
   },
+  mounted () {
+    this.displayAllPosts()
+  },
   methods : {
-    loadPost(payload) {
-      this.post = payload.post;
-    },
+    // loadPost(payload) {
+    //   this.post = payload.post;
+    // },
     displayAllPosts () {
       axios
       .get("http://localhost:3000/api/posts")
