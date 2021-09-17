@@ -1,7 +1,7 @@
 // Import du schéma de données User défini comme modèle via Sequelize
 
 const db = require('../models');
-const { User } = db.sequelize.models;
+const { User, Post } = db.sequelize.models;
 
 // Import du package de chiffrement bcrypt
 const bcrypt = require('bcrypt');
@@ -96,4 +96,14 @@ exports.getOneUser = (req, res, next) => {
         .then(user => res.status(200).json(user))
         .catch(error => res.status(404).json({ error }));
         
+};
+
+// Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de toutes les posts dans la base de données 
+exports.getAllUserPosts = (req, res, next) => {
+    Post.findAll({
+        where: { userId: req.params.id },
+        }
+        )
+        .then(posts => res.status(200).json(posts))
+        .catch(error => res.status(400).json({ error }));
 };

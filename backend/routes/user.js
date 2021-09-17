@@ -22,5 +22,8 @@ router.get('/users', userCtrl.getAllUsers);
 // Renvoie le user avec l'ID fourni
 router.get('/users/:id', userCtrl.getOneUser);
 
+// Renvoie le tableau de tous les users dans la base de données 
+router.get('/users/:id/posts', userCtrl.getAllUserPosts);
+
 // Enregistrement des différentes routes dans le routeur Express
 module.exports = router;

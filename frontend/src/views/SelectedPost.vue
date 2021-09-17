@@ -35,8 +35,8 @@ export default {
       axios
       .get(`http://localhost:3000/api/posts/${this.$route.params.postId}`)
       .then(response => {
-        console.log(this.$route.params.postId),
-        console.log("post", response.data);
+        console.log("postId", this.$route.params.postId),
+        console.log("selected post", response.data);
         this.post = response.data;
         console.log("post", this.post.content);
       })

@@ -1,48 +1,42 @@
 <template>
-  <div class="public-profile">
-    <h1>This is the home page with the posts from the selected user</h1>
+  <div class="home">
 
-    <p>
-      {{ selectedUserAccount.firstName }} {{ selectedUserAccount.lastName }}
-    </p>
-    
-    <AllPosts />
+    <h1>This is the home page with the posts from the selected user</h1>
+    <Post v-for="post in userposts" v-bind:key="post.id" :post="post" />
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import AllPosts from '@/components/AllPosts.vue';
-import axios from "axios";
+import axios from "axios"
+import Post from '@/components/Post.vue'
 
 export default {
-  name: 'SelectedUserAccount',
-  components: {    
-    AllPosts
+  name: 'Home',
+  components: {
+    Post
   },
-  data () {
+  data() {
     return {
-      selectedUserAccount: null
-    }
+      post: {
+        id: "",
+        content: "",
+        imageUrl: ""
+      },        
+      userposts: [],      
+    };
   },
   mounted () {
-    this.loadSelectedUserAccount()
-  },
-  methods : {
-    loadSelectedUserAccount () {
-      axios
-      .get(`http://localhost:3000/api/users/${this.$route.params.userId}`)
+    axios
+      .get(`http://localhost:3000/api/users/${this.$route.params.userId}/posts`)
       .then(response => {
-        console.log(this.$route.params.userId),
-        console.log("selectedUserAccount", response.data);
-        this.selectedUserAccount = response.data;
-        console.log("selectedUserAccount", this.selectedUserAccount.firstName);
+        console.log("selected user posts", this.userposts);
+        this.userposts = response.data;
       })
       .catch(error => {
         console.log(error);
       })
-    }    
-  }  
+  },
 }
 </script>

@@ -2,21 +2,43 @@
   <div class="home">
     <h1>This is the home page with the posts from all users</h1>
     <AddPost />
-    <AllPosts />
+    <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import axios from "axios"
 import AddPost from '@/components/AddPost.vue'
-import AllPosts from '@/components/AllPosts.vue'
+import Post from '@/components/Post.vue'
 
 export default {
   name: 'Home',
   components: {
     AddPost,
-    AllPosts
-  }
+    Post
+  },
+  data() {
+    return {
+      post: {
+        id: "",
+        content: "",
+        imageUrl: ""
+      },        
+      posts: [],      
+    };
+  },
+  mounted () {
+    axios
+      .get(`http://localhost:3000/api/posts`)
+      .then(response => {
+        console.log("posts", this.posts);
+        this.posts = response.data;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  },
 }
 </script>

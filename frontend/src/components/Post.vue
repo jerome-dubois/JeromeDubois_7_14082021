@@ -1,9 +1,6 @@
 <template>
   
   <div class="post">
-    
-    <h1>This is the selected Post component</h1>
-
     <b-card>
       
       <!-- <div> -->
@@ -19,12 +16,16 @@
           {{ post.content }}
       </b-card-text>
 
-      <div v-if="post.imageUrl">
+      <b-card-text v-if="post.imageUrl">
+          {{ post.imageUrl }}
+      </b-card-text>
+
+      <!-- <div v-if="post.imageUrl">
         <img      
         :src="post.imageUrl"
         alt=""
         />
-      </div>
+      </div> -->
 
     </b-card> 
     
@@ -38,9 +39,20 @@
 export default {
   name: 'Post',
   components: {},
-  props: ['post']
+  // props: {
+  //   post: {
+  //     type: Object,
+  //     required: true
+  //   }
+  // },
+  props: ['post'],
   // computed: {
   //   ...mapState("user")
   // }
+  methods: {
+    // emitPost() {
+    //   this.$emit("post", { post: this.post });
+    // }
+  }
 }
 </script>
