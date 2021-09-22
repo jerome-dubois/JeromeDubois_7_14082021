@@ -12,6 +12,8 @@
         </router-link>
       </div> -->
 
+      <ModifyPost :post="post" />
+
       <b-card-text v-if="post.content">
           {{ post.content }}
       </b-card-text>
@@ -35,10 +37,13 @@
 
 <script>
 // import { mapState } from "vuex";
+import ModifyPost from './ModifyPost'
 
 export default {
   name: 'Post',
-  components: {},
+  components: {
+    ModifyPost
+  },
   // props: {
   //   post: {
   //     type: Object,

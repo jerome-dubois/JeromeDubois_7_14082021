@@ -13,7 +13,7 @@ module.exports = {
       {
       imageUrl: "url post 2",
       content: "This post 2 is a test",
-      userId: 3,
+      userId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
       },

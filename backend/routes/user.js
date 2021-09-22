@@ -4,6 +4,9 @@ const express = require('express');
 // Création du routeur Express pour y enregistrer les différentes routes définies ci-après
 const router = express.Router();
 
+// Import du middleware d'authentification
+const auth = require('../middleware/auth');
+
 // Import du controller user.js
 const userCtrl = require('../controllers/user');
 
@@ -17,13 +20,19 @@ router.post('/auth/register', validatePassword, userCtrl.register);
 router.post('/auth/login', userCtrl.login);
 
 // Renvoie le tableau de tous les users dans la base de données 
-router.get('/users', userCtrl.getAllUsers);
+router.get('/users', auth, userCtrl.getAllUsers);
 
 // Renvoie le user avec l'ID fourni
-router.get('/users/:id', userCtrl.getOneUser);
+router.get('/users/:id', auth, userCtrl.getOneUser);
+
+// Renvoie le user connecté
+router.get('/loggedUser', auth, userCtrl.getLoggedUser);
 
 // Renvoie le tableau de tous les users dans la base de données 
-router.get('/users/:id/posts', userCtrl.getAllUserPosts);
+router.get('/users/:id/posts', auth, userCtrl.getAllUserPosts);
+
+// Supprime le user avec l'ID fourni.
+// router.delete('/:id', auth, userCtrl.deleteUser);
 
 // Enregistrement des différentes routes dans le routeur Express
 module.exports = router;

@@ -31,10 +31,14 @@ export default {
   },
   mounted () {
     axios
-      .get(`http://localhost:3000/api/posts`)
-      .then(response => {
-        console.log("posts", this.posts);
+      .get(`http://localhost:3000/api/posts`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(response => {        
         this.posts = response.data;
+        console.log("posts", this.posts);
       })
       .catch(error => {
         console.log(error);

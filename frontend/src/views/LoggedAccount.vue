@@ -1,15 +1,40 @@
 <template>
-  <div class="logged-account">
-    <h1>This is the logged account page</h1>
+  <div class="card">
+    <h1 class="card__title">Espace Perso</h1>
+    <p class="card__subtitle">Voilà donc qui je suis...</p>
+    <p>{{userInfos.firstName}} {{userInfos.lastName}} {{userInfos.email}}</p>
+    <p>{{userInfos.token}} {{userInfos.id}}</p>
+    <!-- <img :src="user.photo"/> -->
+    <div class="form-row">
+      <button class="button">
+      <!-- <button @click="logout()" class="button"> -->
+        Déconnexion
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import { mapState } from 'vuex'
 export default {
-  name: 'LoggedAccount',
-  components: {
-  }
+    name: 'LoggedAccount',
+    mounted () {
+    // console.log("store_user",this.$store.state.user);
+    this.$store.dispatch('getUserInfos');   
+    console.log("userInfos in store",this.$store.state.userInfos);
+    // if (this.$store.state.user.userId == -1) {
+    //   this.$router.push('/');
+    //   return ;
+    // }    
+    },    
+    computed: {
+    ...mapState(["userInfos"])
+    },
+    //   methods: {
+    //     logout: function () {
+    //       this.$store.commit('LOGOUT');
+    //       this.$router.push('/');
+    //     }
+    //   }
 }
 </script>

@@ -35,6 +35,7 @@
 <script>
 
 import axios from "axios";
+import { mapState } from 'vuex';
 
 export default {
 
@@ -44,13 +45,16 @@ export default {
     data () {
         return {
           Post: {
-            userId: 5,
+            userId: '',
             content: '',
-            imageUrl: 'testimage'                
+            imageUrl: ''                
           },
           msgError: ""
         };
-    },    
+    },
+    computed: {
+    ...mapState(["userInfos"])
+    },  
     methods: {
       
       addPost() {
@@ -58,10 +62,19 @@ export default {
         console.log("Test Post", this.Post);
         
         axios
-          .post("http://localhost:3000/api/posts", this.Post)
+          .post("http://localhost:3000/api/posts",
+          {
+            Post: this.Post
+          },
+          {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          })
           .then(response => {
             if (response) {
-              window.location.reload();
+              console.log(response);
+              // window.location.reload();
             }
           })
           .catch(error => (this.msgError = error));

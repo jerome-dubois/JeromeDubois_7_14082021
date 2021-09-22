@@ -6,18 +6,32 @@ const { Post } = db.sequelize.models;
 // Import de 'file system' de Node pour la gestion des fichiers (dont le téléchargement)
 const fs = require('fs');
 
+// Import du package pour pouvoir créer et vérifier les tokens d'authentification
+const jwt = require('jsonwebtoken');
+
 // Définition et export des différentes logiques métier correspondant à chacune des routes
 
 // Définition et export de la logique métier appliquée à la route post qui crée le post avec l'ID fourni
 
 exports.createPost = (req, res, next) => {
-    console.log(req.body);
-    // console.log(JSON.parse(req.body));
-    // const postObject = JSON.parse(req.body);
-    const postObject = req.body;
-    // delete postObject._id;
+    const token = req.headers.authorization.split(' ')[1];
+    console.log(token);
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const userId = decodedToken.userId;
+    // console.log("userId",userId);
+    // console.log("req.body.userId",req.body.userId);
+    console.log("req.body",req.body);
+    console.log("req.body.Post",req.body.Post);
+    console.log("req.body.Post.content",req.body.Post.content);
+    const postObject = req.body.Post;
+    // const post = new Post({
+    //     userId: userId,
+    //     content: req.body.content,
+    //     imageUrl: req.body.imageUrl
+    // });    
     const post = new Post({
-        ...postObject
+        ...postObject,
+        userId: userId,         
         // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     post.save()
@@ -34,7 +48,8 @@ exports.modifyPost = (req, res, next) => {
     // Si la modification de l'objet post implique un changement d'image
     if (req.file) {
         // Alors on recherche l'objet à modifier
-        Post.findOne({ _id: req.params.id })
+        // Post.findOne({ id: req.params.id })
+        Post.findOne({ id: req.body.id })
         // Puis on supprime l'ancienne image correspondante
         .then((post) => {
             const filename = post.imageUrl.split('/images/')[1];

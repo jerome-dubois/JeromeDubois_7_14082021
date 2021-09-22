@@ -7,6 +7,7 @@ module.exports = {
       lastName: 'Dubois',
       email: 'jerome.dubois@gmail.com',
       password: 'ajekjfkeajf324!',
+      admin: true,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -15,6 +16,7 @@ module.exports = {
       lastName: 'Dupont',
       email: 'jean.dupont@gmail.com',
       password: '294898gjjg*$',
+      admin: false,
       createdAt: new Date(),
       updatedAt: new Date()
     }

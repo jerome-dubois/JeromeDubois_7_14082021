@@ -16,10 +16,10 @@ const postsCtrl = require('../controllers/posts');
 // Implémentation des différentes routes des posts avec, pour chaque route, authentification et configuration de la logique métier appropriée:
 
 // Renvoie le tableau de tous les posts dans la base de données 
-router.get('/', postsCtrl.getAllPosts);
+router.get('/', auth, postsCtrl.getAllPosts);
 
 // Renvoie le post avec l'ID fourni
-router.get('/:id', postsCtrl.getOnePost);
+router.get('/:id', auth, postsCtrl.getOnePost);
 
 // Capture et enregistre l'image du post, analyse le post en utilisant une chaîne de caractères et l'enregistre dans la base de données, en définissant correctement son image URL.
 router.post('/', postsCtrl.createPost);

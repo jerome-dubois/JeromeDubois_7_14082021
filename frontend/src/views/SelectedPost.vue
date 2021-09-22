@@ -33,7 +33,11 @@ export default {
   methods : {    
     displayPost () {
       axios
-      .get(`http://localhost:3000/api/posts/${this.$route.params.postId}`)
+      .get(`http://localhost:3000/api/posts/${this.$route.params.postId}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
       .then(response => {
         console.log("postId", this.$route.params.postId),
         console.log("selected post", response.data);

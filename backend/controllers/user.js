@@ -25,11 +25,8 @@ exports.register = (req, res, next) => {
         return res.status(400).json({ error: 'Votre email n\'est pas valide !'})
     } else {
         bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            // Masquage de l'email avec la librairie crypto-js par chiffrement avec la méthode HmacSHA512
-            // const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
-            // console.log(emailCryptoJs); 
-            // Création du nouvel utilisateur avec l'email masqué et le mot de passe haché
+        .then(hash => {           
+            // Création du nouvel utilisateur avec le mot de passe haché
             const user = new User({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -45,31 +42,36 @@ exports.register = (req, res, next) => {
      
 };
 
-// Définition et export de la logique métier de la route post qui vérifie les informations d'identification de l'utilisateur, 
-// en renvoyant l'identifiant userID depuis la base de données et un jeton Web JSON signé (contenant également l'identifiant userID)
+/* Définition et export de la logique métier de la route post qui vérifie les informations d'identification de l'utilisateur, en renvoyant l'identifiant userID depuis la base de données et un jeton Web JSON signé (contenant également l'identifiant userID)*/
 exports.login = (req, res, next) => {
-    // const emailCryptoJs = CryptoJS.HmacSHA512(req.body.email, `${process.env.CRYPTOJS_SECRET_KEY}`).toString();
-
-    User.findOne({ email: req.body.email })
+    
+    User.findOne({
+        where: { email: req.body.email },
+        })        
         .then(user => {
+            console.log("user.email", user.email)
+            console.log("req.body.password", req.body.password)
+            console.log("user.password", user.password)
             if (!user) {
                 return res.status(401).json({ error: 'User not found !' })
-            }
+            }            
             bcrypt.compare(req.body.password, user.password)
-               .then(valid => {
+               .then(valid => {                   
                    if (!valid) {
                     return res.status(401).json({ error: 'Password incorrect !' })
                    }
                    res.status(200).json({
-                       userId: user._id,
+                       userId: user.id,
                        token: jwt.sign(
-                           { userId: user._id },
+                           { userId: user.id },
                            'RANDOM_TOKEN_SECRET',
                            { expiresIn: '24h' }
                        ) 
                    });
                })
                .catch(error => res.status(500).json({ error }));
+
+               console.log("req.headers", req.headers)
 
         })
         .catch(error => res.status(500).json({ error }));
@@ -96,6 +98,34 @@ exports.getOneUser = (req, res, next) => {
         .then(user => res.status(200).json(user))
         .catch(error => res.status(404).json({ error }));
         
+};
+
+// Définition et export de la logique métier appliquée à la route delete qui supprime le user avec l'ID fourni
+// exports.deleteUser = (req, res, next) => {
+//     USer.findOne({ _id: req.params.id})
+//         .then(user => {            
+//                 User.deleteOne({ _id: req.params.id })
+//                     .then(() => res.status(200).json({message : 'User deleted !'}))
+//                     .catch(error => res.status(400).json({ error }));
+//             });
+//         })
+//         .catch(error => res.status(500).json({ error }));       
+// };
+
+
+exports.getLoggedUser = (req, res, next) => {
+    
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+    const userId = decodedToken.userId;
+    console.log("userId", userId);
+    User.findOne({
+        attributes: ['id', 'firstName','lastName','email'],
+        where: { id: userId }
+    })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(500).json(error))
+
 };
 
 // Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de toutes les posts dans la base de données 
