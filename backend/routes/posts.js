@@ -25,7 +25,8 @@ router.get('/:id', auth, postsCtrl.getOnePost);
 router.post('/', postsCtrl.createPost);
 
 // Met à jour le post avec l'identifiant fourni. Si une image est téléchargée, elle est capturée l'image URL des sauces mise à jour. Si aucun fichier n'est fourni, les détails de la sauce figurent directement dans le corps de la demande (req.body.name, req.body.heat etc). Si un fichier est fourni, la sauce avec chaîne est en req.body.sauce.
-router.put('/:id', auth, multer, postsCtrl.modifyPost);
+// router.put('/:id', auth, multer, postsCtrl.modifyPost);
+router.put('/:id', auth, postsCtrl.modifyPost);
 
 // Supprime le post avec l'ID fourni.
 router.delete('/:id', auth, postsCtrl.deletePost);

@@ -37,9 +37,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    // setStatus: function (state, status) {
-    //   state.status = status;
-    // },
+    setStatus: function (state, status) {
+      state.status = status;
+    },
     // logUser: function (state, user) {
     //   instance.defaults.headers.common['Authorization'] = user.token;
     //   localStorage.setItem('user', JSON.stringify(user));
@@ -85,21 +85,26 @@ export default new Vuex.Store({
           });
       });
     },
-    // createAccount: ({commit}, userInfos) => {
-    //   commit('setStatus', 'loading');
-    //   return new Promise((resolve, reject) => {
-    //     commit;
-    //     instance.post('/createAccount', userInfos)
-    //     .then(function (response) {
-    //       commit('setStatus', 'created');
-    //       resolve(response);
-    //     })
-    //     .catch(function (error) {
-    //       commit('setStatus', 'error_create');
-    //       reject(error);
-    //     });
-    //   });
-    // },
+    register: ({commit}, userInfos) => {
+      commit('setStatus', 'loading');
+      return new Promise((resolve, reject) => { 
+        
+        axios
+          .post("http://localhost:3000/api/auth/register", userInfos)
+          .then(response => {
+            console.log(response);
+          })
+          .then(function (response) {
+            commit('setStatus', 'created');
+            resolve(response);
+          })
+          .catch(function (error) {
+            commit('setStatus', 'error_create');
+            reject(error);
+          });        
+      });
+    },
+
     getUserInfos: ({commit}) => {
 
       axios
@@ -115,64 +120,7 @@ export default new Vuex.Store({
       .catch(error => console.log(error));
 
     }
+
   }
 
 })
-
-// export default new Vuex.Store({
-//   state: {
-    
-//     userInfos: {
-//       email: '',
-//       password:''
-//     }
-
-    // userInfos: {
-    //   firstName: '',
-    //   lastName: '',
-    //   email: '',
-    //   userId: ''      
-    //   token: null,
-    //   admin: false
-    // }
-  // },
-  // mutations: {
-  //   SAVE_USER_INFOS_IN_STORE: (state, userInfos) => {
-  //       state.userInfos = userInfos;
-  //   }
-  // },
-  // actions: {
-    
-    // increment (context) {
-    //   context.commit('increment')
-    // }
-
-    // login: ({commit}, userInfos) => {
-    //   commit('SAVE_USER_INFOS_IN_STORE', userInfos);
-      // console.log(userInfos);
-    // }
-
-    // login : ({commit}, userInfos) => {
-    //   commit;
-    //   console.log(userInfos);
-    // }
-    // getUserInfosInStore(context) {
-           
-    //   axios
-    //     .get("http://localhost:3000/api/loggedUser", {
-    //       headers: {
-    //         Authorization: "Bearer " + localStorage.getItem("token")
-    //       }
-    //     })        
-    //     .then(response => {
-    //       console.log('response',response);
-    //       context.commit('SAVE_USER_INFOS_IN_STORE', response.data.userInfos)
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // }
-//   },
-//   modules: {
-//   }
-// })

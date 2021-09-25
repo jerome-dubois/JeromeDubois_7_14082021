@@ -9,30 +9,30 @@
 
       </div>
 
-      <div>
-        <imgv-if="url" :src="url" alt="" />
-      </div>
+      <!-- <div>
+        <img v-if="url" :src="url" alt="" />
+      </div> -->
 
     </b-form-group> 
         
     <b-form-group>
       <div>
-        <button          
+        <!-- <button          
           @click="triggerInput"
           type="button"
         >
           <span>Choisir un fichier</span>
           
-        </button>
+        </button> -->
 
-        <button
+        <!-- <button
           
           :disabled="emptyField"
           type="submit"
         >
           <span>Publier un post</span>
           
-        </button>
+        </button> -->
         
         <!-- <input
           ref="fileInput"
@@ -62,9 +62,9 @@ export default {
     //   this.url = URL.createObjectURL(event.target.files[0])
     //   this.$emit('fileSelected', event.target.files[0])
     // },
-    // updateValue (value) {
-    //   this.$emit('input', value)
-    // },
+    updateValue (value) {
+      this.$emit('input', value)
+    },
     // triggerInput () {
     //   this.$refs.fileInput.click()
     // }

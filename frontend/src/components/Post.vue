@@ -14,12 +14,16 @@
 
       <ModifyPost :post="post" />
 
+      <b-card-text v-if="post.id">
+          <span>Post id: {{ post.id }}</span>
+      </b-card-text>
+
       <b-card-text v-if="post.content">
-          {{ post.content }}
+          <span>Post content: {{ post.content }}</span>
       </b-card-text>
 
       <b-card-text v-if="post.imageUrl">
-          {{ post.imageUrl }}
+          <span>Post imageUrl: {{ post.imageUrl }}</span>
       </b-card-text>
 
       <!-- <div v-if="post.imageUrl">

@@ -2,117 +2,97 @@
   <div class="register">    
     <h1>Hello, this is the register page</h1>
 
-    <b-card>
-
-      <b-card-text>
-        Créer un compte
-      </b-card-text>
-      
-      <b-form>
-      
-        <b-form-group id="firstName-group" label="Prénom" label-for="firstName">
-          <b-form-input
-            id="firstName"
-            v-model="formRegister.firstName"
-            type="text"
-            placeholder="Prénom"
-            required
-          ></b-form-input>
-        </b-form-group>
-        
-        <b-form-group id="lastName-group" label="Nom" label-for="lastName">
-          <b-form-input
-            id="lastName"
-            v-model="formRegister.lastName"
-            type="text"
-            placeholder="Nom"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="email-group" label="Email" label-for="email">
-          <b-form-input
-            id="email"
-            v-model="formRegister.email"
-            type="email"
-            placeholder="Email"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group id="password-group" label="Mot de passe" label-for="password">
-          <b-form-input
-            id="password"
-            v-model="formRegister.password"
-            type="password"
-            placeholder="Mot de passe"
-            required
-          ></b-form-input>
-        </b-form-group>
-      
-        <b-button
-          @click.prevent="register"
-          type="submit"
-          variant="primary">
-          <span>S'inscrire</span>
-        </b-button>
-
-      </b-form>
-
-      <p>
-        Vous avez déjà un compte ?
-        <router-link to="/login">
-          Identifiez-vous! 
-        </router-link>
-      </p>
-
-    </b-card>     
-
+    <div class="card">
+        <h1 class="card__title">Inscription</h1>    
+        <p class="card__subtitle" >Tu as déjà un compte ? <router-link to="/login" class="card__action">Se connecter</router-link></p>
+    </div>
+    <div class="form-row">
+      <input v-model="email" class="form-row__input" type="text" placeholder="Adresse mail"/>
+    </div>
+    <div class="form-row">
+      <input v-model="firstName" class="form-row__input" type="text" placeholder="Prénom"/>
+      <input v-model="lastName" class="form-row__input" type="text" placeholder="Nom"/>
+    </div>   
+    <div class="form-row">
+      <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
+    </div>        
+    <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
+      Adresse mail déjà utilisée
+    </div>
+    <div class="form-row">      
+      <button @click="register()" class="button" :class="{'button--disabled' : !validatedFields}">
+        <span v-if="status == 'loading'">Création en cours...</span>
+        <span v-else>Créer mon compte</span>
+      </button>     
+    </div>
   </div>
-
 </template>
 
 <script>
 
-import axios from "axios";
+import { mapState } from 'vuex'
 
 export default {
   name: 'Register',
   components: {
   },
-  data() {
+  data: function () {
     return {
-      formRegister: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''         
-      }
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
     }
-  },
-  // computed: {
-  //   ...mapState(["user"])
-  // },
-  methods: {
-    register() {
-      if (
-        this.formRegister.firstName !== null &&
-        this.formRegister.lastName !== null &&
-        this.formRegister.email !== null &&
-        this.formRegister.password !== null
-      ) {
-        axios
-          .post("http://localhost:3000/api/auth/register", this.formRegister)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => console.log(error));
+  },  
+  computed: {
+    validatedFields: function () {
 
-      } else {
-        alert ("Veuillez saisir la totalité des champs du formulaire");
-        // this.errorMessage = 'Veuillez saisir la totalité des champs du formulaire';
-      }
+      if (this.email != "" && this.prenom != "" && this.nom != "" && this.password != "") {
+          return true;
+        } else {
+          return false;
+        }      
+      
+    },
+    ...mapState(['status', 'user'])
+  },
+  methods: {
+    register: function () {
+      const self = this;
+      this.$store.dispatch('register', {
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        password: this.password,
+      }).then(function () {
+        self.login();
+      }, function (error) {
+        console.log(error);
+      })
     }   
   }
 };
 </script>
+
+<style scoped>
+  .form-row {
+    display: flex;
+    margin: 16px 0px;
+    gap:16px;
+    flex-wrap: wrap;
+  }
+  .form-row__input {
+    padding:8px;
+    border: none;
+    border-radius: 8px;
+    background:#f2f2f2;
+    font-weight: 500;
+    font-size: 16px;
+    flex:1;
+    min-width: 100px;
+    color: black;
+  }
+  .form-row__input::placeholder {
+    color:#aaaaaa;
+  }
+</style>
