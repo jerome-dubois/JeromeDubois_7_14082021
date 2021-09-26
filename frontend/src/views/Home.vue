@@ -1,8 +1,13 @@
 <template>
-  <div class="home">
+  <div class="home mt-5">
     <h1>This is the home page with the posts from all users</h1>
     <AddPost />
-    <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
+    
+    <b-row class="row justify-content-center align-items-center flex-column">
+      <b-col cols="12" lg="6">
+        <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
+      </b-col>
+    </b-row>   
 
   </div>
 </template>

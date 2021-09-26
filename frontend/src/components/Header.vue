@@ -1,6 +1,6 @@
 <template>
   <nav class="row navbar navbar-expand-lg navbar-light bg-light fixed-top px-4">
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-toggle="collapse"
@@ -10,12 +10,12 @@
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <router-link class="navbar-brand" to="/">
       <img class="w-50" src="../assets/icon-left-font-monochrome-orange.svg" alt="Logo Groupomania" />
     </router-link>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarToggle">
+    <!-- <div class="collapse navbar-collapse justify-content-end" id="navbarToggle">
       <ul class="navbar-nav mt-2 mt-lg-0">
         <li class="nav-item" v-if="user.token!==null">
           <router-link class="nav-link" to="/">Home</router-link>
@@ -35,7 +35,7 @@
           <button type="button" class="btn btn-danger" @click="disconnect">Disconnect</button>
         </li>
       </ul>
-    </div>
+    </div> -->
   </nav>
 </template>
 

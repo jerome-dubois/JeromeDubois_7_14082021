@@ -23,25 +23,15 @@ exports.createPost = (req, res, next) => {
     // console.log("req.body.userId",req.body.userId);
     console.log("req.body",req.body);
     console.log("req.file",req.file);
-    console.log("req.protocol",req.protocol);
-    // console.log("req.file.filename",req.file.filename);
-    console.log("req.body.file",req.body.file);
-
-
+    console.log("req.file.filename",req.file.filename);
+    // console.log("req.body.file",req.body.file);
     // console.log("req.body.Post",req.body.Post);
     // console.log("req.body.Post.content",req.body.Post.content);
-    const postObject = req.body.Post;
-    // const post = new Post({
-    //     userId: userId,
-    //     content: req.body.content,
-    //     imageUrl: req.body.imageUrl
-    // });
-    
-    // if (req.file) {
-    //     postObject.imageUrl = `${req.protocol}://${req.get('host')}/public/${
-    //       req.file.filename
-    //     }`
-    //   }
+    const postObject = req.body;
+        
+    if (req.file) {
+        postObject.imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    }
 
     const post = new Post({
         ...postObject,
@@ -50,6 +40,7 @@ exports.createPost = (req, res, next) => {
     post.save()
         .then(() => res.status(201).json({ message: 'Post registered !'}))
         .catch(error => res.status(400).json({ error }));
+
 };
 
 /* Définition et export de la logique métier appliquée à la route put qui met à jour le post avec l'identifiant fourni. 
@@ -64,8 +55,11 @@ exports.modifyPost = (req, res, next) => {
     // const userId = decodedToken.userId;
     // console.log("userId",userId);
     // console.log("req.body.userId",req.body.userId);
+    // console.log("req.body",req.body);
+    // console.log("req.params.id",req.params.id);
     console.log("req.body",req.body);
-    console.log("req.params.id",req.params.id);
+    console.log("req.file",req.file);
+    console.log("req.file.filename",req.file.filename);
     // console.log("req.body.Post",req.body.Post);
     // console.log("req.body.Post.content",req.body.Post.content);
     // Si la modification de l'objet post implique un changement d'image
@@ -81,10 +75,13 @@ exports.modifyPost = (req, res, next) => {
         })
     }
 
-    /* Puis, on définit postObject comme une concaténation des valeurs du post modifié avec une nouvelle valeur d'url pour la nouvelle image si elle existe sinon on y affecte les nouvelles valeurs de post mais avec la même valeur d'url en cas d'image non modifiée*/
-    const postObject = req.body;
-
-    // Alors on recherche l'objet à modifier
+    /* Puis, on définit postObject comme une concaténation des valeurs de la sauce modifiée avec une nouvelle valeur d'url pour la nouvelle image si elle existe sinon on y affecte les nouvelles valeurs de post mais avec la même valeur d'url en cas d'image non modifiée*/
+    const postObject = req.file ? {
+        ...req.body,
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    } : { ...req.body };
+   
+    // Alors on recherche l'objet à modifier à nouveau
     Post.findOne({
         where: { id: req.params.id }          
     })

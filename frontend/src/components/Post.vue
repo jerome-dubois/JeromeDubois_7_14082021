@@ -14,9 +14,9 @@
 
       <ModifyPost :post="post" />
 
-      <!-- <b-card-text v-if="post.id">
+      <b-card-text v-if="post.id">
           <span>Post id: {{ post.id }}</span>
-      </b-card-text> -->
+      </b-card-text>
 
       <b-card-text class="text-left mt-3 mb-0 mb-lg-3" v-if="post.content">
           <span>Post content: {{ post.content }}</span>

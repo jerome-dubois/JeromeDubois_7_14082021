@@ -57,6 +57,7 @@ export default {
             content: '',
             imageUrl: ''                
           },
+          selectedFile: null,
           msgError: ""
         };
     },
@@ -71,13 +72,21 @@ export default {
 
       addPost() {
 
-        console.log("Test Post", this.Post);
-        
+        // console.log("Test Post", this.Post);
+        // console.log("Test selectedFile", this.selectedFile);
+        let formData = new FormData();
+        // formData.append('file', this.file);
+        formData.append("content", this.Post.content);
+        formData.append("image", this.selectedFile);
+        console.log("test image", formData.get("image"));
+        console.log("test content", formData.get("content"));
+        console.log("formData", formData);
+
         axios
-          .post("http://localhost:3000/api/posts",
-          {
-            Post: this.Post
-          },
+          .post("http://localhost:3000/api/posts", formData,
+          // {
+          //   Post: this.Post
+          // },
           {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")

@@ -1,9 +1,10 @@
-<template>
+<template>  
+  
   <div id="app">
     
-    <div>
-      
-      <Header />
+    <Header />
+    <!-- <div>       -->
+      <!-- <Header /> -->
       <!-- <router-link to="/">
         <img
           id="logo"
@@ -11,10 +12,11 @@
           alt="logo Groupomania"
         />
       </router-link> -->
-    </div>
+    <!-- </div> -->
     <router-view/>
     
   </div>
+  
 </template>
 
 <script>

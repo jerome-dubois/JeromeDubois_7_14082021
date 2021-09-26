@@ -45,7 +45,8 @@
           ref="fileInput"
           class="d-none"
           type="file"
-          @change="fileSelected"
+          name="image"
+          @change="onFileSelected"
         />
 
       </div>
@@ -58,16 +59,22 @@
 export default {
   name: 'PostForm',
   components: {},
-  props: ['value', 'url', 'onFormSubmit', 'isCreating'],
+  props: ['value', 'imgUrl', 'onFormSubmit', 'isCreating','inputFile'],
+  data () {
+    return {
+      // userData: JSON.parse(localStorage.getItem('userData')),
+      url: this.imgUrl
+    }
+  },
   watch: {
     onFormSubmit () {
       this.url = null
     }
   },
   methods: {
-    fileSelected (event) {
+    onFileSelected (event) {
       this.url = URL.createObjectURL(event.target.files[0])
-      this.$emit('fileSelected', event.target.files[0])
+      this.$emit('onFileSelected', event.target.files[0])
     },
     updateValue (value) {
       this.$emit('input', value)
@@ -77,9 +84,9 @@ export default {
     }
   },
   computed: {
-    // emptyField () {
-    //   return !this.value.trim().length && !this.url
-    // }
+    emptyField () {
+      return !this.value.trim().length && !this.url
+    }
   }
 }
 </script>

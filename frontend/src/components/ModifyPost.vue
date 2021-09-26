@@ -20,7 +20,8 @@
         ok-only
          >
             <b-form>
-              <PostForm                           
+              <PostForm
+                @onFileSelected="onFileSelected"                        
                 v-model="content"     
               />
             </b-form>
@@ -65,9 +66,9 @@ export default {
   props: ['post'],
   data () {
     return {
-        content: this.post.content
+        content: this.post.content,
         // userData: JSON.parse(localStorage.getItem('userData')),
-        // selectedFile: null
+        selectedFile: null
     }
   },  
   computed: {
@@ -89,23 +90,35 @@ export default {
         .catch(error => console.log(error));
    
     },
-    selectFile (file) {
+    onFileSelected (file) {
       this.selectedFile = file
     },
-
     updatePost () {
+      
+      console.log("Test Post", this.content);
+      console.log("Test selectedFile", this.selectedFile);
+
+      let formData = new FormData();
+        formData.append("content", this.content);
+        formData.append("image", this.selectedFile);
+        console.log("test image", formData.get("image"));
+        console.log("test content", formData.get("content"));
+        // console.log("formData", formData);
 
       axios
-        .put(`http://localhost:3000/api/posts/${this.post.id}`, 
-        {            
-            content: this.content,
-            // imageUrl: this.post.imageUrl,
-        },
+        .put(`http://localhost:3000/api/posts/${this.post.id}`, formData,
+        // {            
+        //     content: this.content,
+        //     // imageUrl: this.post.imageUrl,
+        // },
         {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }
-        })        
+        })
+        .then(() => {
+          window.location.reload();
+        })       
         .catch(error => console.log(error));
    
     },  
