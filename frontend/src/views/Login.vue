@@ -35,10 +35,12 @@ export default {
       password: '',
     }
   },
-  components: {     
-  },
   mounted: function () {
-    if (this.$store.state.user.userId != -1) {
+    // if (this.$store.state.token !== null) {
+    //   this.$router.push('/account');
+    //   return ;
+    // }
+    if (this.token !== null) {
       this.$router.push('/account');
       return ;
     }
@@ -51,28 +53,29 @@ export default {
           return false;
         }
     },
-    ...mapState(['status', 'userInfos'])
+    ...mapState(['status','token','userInfos'])
   },
   methods: {
 
     login: function () {
-      // const self = this;
+      const self = this;
       this.$store.dispatch('login', {
             email: this.email,
             password: this.password,
-      });      
-      // .then(
-      //   function () {
-      //   self.$router.push('/account');
-      //   },
-      //   function (error) {
-      //   console.log(error);
-      //   }
-      // )
+      })     
+      .then(
+        function () {
+        self.$router.push('/account');
+        },
+        function (error) {
+        console.log(error);
+        }
+      )
     },
     
   }
 }
+
 </script>
 
 <style scoped>
@@ -96,4 +99,5 @@ export default {
   .form-row__input::placeholder {
     color:#aaaaaa;
   }
+
 </style>

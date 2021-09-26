@@ -1,12 +1,12 @@
 <template>
   <div class="card">
     <h1 class="card__title">Espace Perso</h1>
-    <p class="card__subtitle">Voilà donc qui je suis...</p>
-    <p>{{userInfos.firstName}} {{userInfos.lastName}} {{userInfos.email}}</p>
-    <p>{{userInfos.token}} {{userInfos.id}}</p>
+    <p class="card__subtitle">Voici qui est connecté:</p>
+    <p>{{userInfos.firstName}} {{userInfos.lastName}}</p>
+    <p>{{userInfos.email}}</p>
+    <!-- <p>{{userInfos.token}} {{userInfos.id}}</p> -->
     <!-- <img :src="user.photo"/> -->
-    <div class="form-row">
-      <!-- <button class="button"> -->
+    <div class="form-row">      
       <button @click="logout()" class="button">
         Déconnexion
       </button>

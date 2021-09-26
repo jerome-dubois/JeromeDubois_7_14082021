@@ -39,9 +39,9 @@ export default new Vuex.Store({
             localStorage.setItem('token',response.data.token)
             // location.replace(location.origin)
           })
-          .then(function (response) {
-          commit('USER_INFOS', response.data);
-          })          
+          // .then(function (response) {
+          // commit('USER_INFOS', response.data);
+          // })          
           .then(function (response) {
             commit('SET_STATUS', '');
             resolve(response);
