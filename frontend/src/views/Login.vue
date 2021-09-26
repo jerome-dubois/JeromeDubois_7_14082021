@@ -36,14 +36,18 @@ export default {
     }
   },
   mounted: function () {
-    // if (this.$store.state.token !== null) {
-    //   this.$router.push('/account');
-    //   return ;
-    // }
-    if (this.token !== null) {
+    if (localStorage.getItem('token')) {      
       this.$router.push('/account');
       return ;
     }
+    // if (this.$store.state.token) {      
+    //   this.$router.push('/account');
+    //   return ;
+    // }
+    // if (this.token !== null) {
+    //   this.$router.push('/account');
+    //   return ;
+    // }
   },  
   computed: {
     validatedFields: function () {
