@@ -7,39 +7,46 @@
           @input="updateValue"
         ></b-form-textarea>
 
+        <!-- <b-form-input
+          id="input-post"
+          v-model ="Post.content"
+          type="text"
+          placeholder="Rédigez votre publication ici"
+        >
+        </b-form-input> -->
+
       </div>
 
-      <!-- <div>
+      <div>
         <img v-if="url" :src="url" alt="" />
-      </div> -->
+      </div>
 
     </b-form-group> 
         
     <b-form-group>
       <div>
-        <!-- <button          
+        <button          
           @click="triggerInput"
           type="button"
         >
           <span>Choisir un fichier</span>
           
-        </button> -->
+        </button>
 
-        <!-- <button
-          
-          :disabled="emptyField"
+        <button
+          v-if="isCreating"
           type="submit"
         >
           <span>Publier un post</span>
           
-        </button> -->
+        </button>
         
-        <!-- <input
+        <input
           ref="fileInput"
           class="d-none"
           type="file"
           @change="fileSelected"
-        /> -->
+        />
 
       </div>
     </b-form-group>
@@ -58,16 +65,16 @@ export default {
     }
   },
   methods: {
-    // fileSelected (event) {
-    //   this.url = URL.createObjectURL(event.target.files[0])
-    //   this.$emit('fileSelected', event.target.files[0])
-    // },
+    fileSelected (event) {
+      this.url = URL.createObjectURL(event.target.files[0])
+      this.$emit('fileSelected', event.target.files[0])
+    },
     updateValue (value) {
       this.$emit('input', value)
     },
-    // triggerInput () {
-    //   this.$refs.fileInput.click()
-    // }
+    triggerInput () {
+      this.$refs.fileInput.click()
+    }
   },
   computed: {
     // emptyField () {

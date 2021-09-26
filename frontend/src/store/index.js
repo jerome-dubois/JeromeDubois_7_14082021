@@ -37,7 +37,7 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setStatus: function (state, status) {
+    SET_STATUS: function (state, status) {
       state.status = status;
     },
     // logUser: function (state, user) {
@@ -74,35 +74,37 @@ export default new Vuex.Store({
           // .then(
           //   console.log(userInfos)
           // )
-          // .then(function (response) {
-          //   commit('setStatus', '');
-          // commit('logUser', response.data);
-          // resolve(response);
-          // })          
+          .then(function (response) {
+            commit('SET_STATUS', '');
+            // commit('logUser', response.data);
+            resolve(response);
+          })          
           .catch(function (error) {
-            // commit('setStatus', 'error_login');
+            commit('SET_STATUS', 'error_login');
             reject(error);
           });
       });
     },
     register: ({commit}, userInfos) => {
-      commit('setStatus', 'loading');
+      commit('SET_STATUS', 'loading');
       return new Promise((resolve, reject) => { 
         
+        console.log("userInfos", userInfos);
         axios
-          .post("http://localhost:3000/api/auth/register", userInfos)
+          .post("http://localhost:3000/api/auth/register", userInfos)          
           .then(response => {
-            console.log(response);
+            console.log(response.data);
           })
           .then(function (response) {
-            commit('setStatus', 'created');
+            commit('SET_STATUS', 'created');
             resolve(response);
           })
           .catch(function (error) {
-            commit('setStatus', 'error_create');
+            commit('SET_STATUS', 'error_create');
             reject(error);
-          });        
-      });
+          });
+
+      });      
     },
 
     getUserInfos: ({commit}) => {

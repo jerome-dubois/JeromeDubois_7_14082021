@@ -6,7 +6,13 @@
 
     <b-form @submit="addPost">            
 
-      <b-form-group>            
+      <PostForm
+        @onFileSelected="onFileSelected"
+        v-model="Post.content"
+        :isCreating="true"
+      />
+
+      <!-- <b-form-group>            
 
         <b-form-input
           id="input-post"
@@ -24,7 +30,7 @@
           >
           <span>Publier le post</span>
           </button>
-      </b-form-group>
+      </b-form-group> -->
 
     </b-form>      
 
@@ -36,11 +42,13 @@
 
 import axios from "axios";
 import { mapState } from 'vuex';
+import PostForm from './PostForm';
 
 export default {
 
     name: 'Add',
     components: {
+      PostForm
     },
     data () {
         return {
@@ -57,6 +65,10 @@ export default {
     },  
     methods: {
       
+      onFileSelected (file) {
+      this.selectedFile = file
+      },
+
       addPost() {
 
         console.log("Test Post", this.Post);

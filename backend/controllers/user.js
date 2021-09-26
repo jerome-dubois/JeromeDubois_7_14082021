@@ -19,6 +19,7 @@ require('dotenv').config();
 // Définition et export de la logique métier de la route post qui chiffre le mot de passe de l'utilisateur,
 // ajoute l'utilisateur à la base de données
 exports.register = (req, res, next) => {
+    console.log("req.body",req.body);
     const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+[a-zA-Z0-9-]+)/;
     
     if (!emailRegex.test(req.body.email)) {

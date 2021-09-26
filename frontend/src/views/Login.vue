@@ -1,5 +1,7 @@
-<template>
-  <div class="card">
+<template>  
+    
+  <div class="card border-0 shadow p-3 mb-5 mt-3 bg-white rounded">  
+        
     <h1 class="card__title">Connexion</h1>
     <p class="card__subtitle">Tu n'as pas encore de compte ? <router-link to="/register" class="card__action">Créer un compte</router-link></p>
     <div class="form-row">
@@ -8,7 +10,7 @@
     <div class="form-row">
       <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
     </div>    
-    <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+    <div class="form-row" v-if="status == 'error_login'">
       Adresse mail et/ou mot de passe invalide
     </div>    
     <div class="form-row">
@@ -18,6 +20,7 @@
       </button>      
     </div>
   </div>
+
 </template>
 
 <script>
@@ -31,6 +34,8 @@ export default {
       email: '',
       password: '',
     }
+  },
+  components: {     
   },
   mounted: function () {
     if (this.$store.state.user.userId != -1) {

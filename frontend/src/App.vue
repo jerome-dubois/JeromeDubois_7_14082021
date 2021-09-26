@@ -2,13 +2,15 @@
   <div id="app">
     
     <div>
-      <router-link to="/">
+      
+      <Header />
+      <!-- <router-link to="/">
         <img
           id="logo"
           :src="require('./assets/icon-left-font.png')"
           alt="logo Groupomania"
         />
-      </router-link>
+      </router-link> -->
     </div>
     <router-view/>
     
@@ -16,11 +18,12 @@
 </template>
 
 <script>
-    
+    import Header from './components/Header'
+
     export default {
     name: 'App',
     components: {
-      
+      Header      
     }
   }
 
@@ -61,7 +64,7 @@
   max-width: 100%;
 }
 body {
-  background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+  background-image: linear-gradient(180deg, #fd2d01 0%, #e08e22 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,6 +85,7 @@ img {
 .card__title {
   text-align:center;
   font-weight: 800;
+  color:#fd2d01;
 }
 .card__subtitle {
   text-align: center;
@@ -89,8 +93,8 @@ img {
   font-weight: 500;
 }
   .button {
-    background: #2196F3;
-    color:white;
+    background: #fd2d01;
+    color:#ffffff;
     border-radius: 8px;
     font-weight: 800;
     font-size: 15px;
@@ -108,7 +112,7 @@ img {
   }
   .button:hover {
     cursor:pointer;
-    background: #1976D2;
+    background: #fd0101;
   }
   .button--disabled {
     background:#cecece;

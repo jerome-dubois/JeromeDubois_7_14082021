@@ -1,6 +1,5 @@
 <template>
-  <div class="register">    
-    <h1>Hello, this is the register page</h1>
+  <div class="register"> 
 
     <div class="card">
         <h1 class="card__title">Inscription</h1>    
@@ -15,12 +14,14 @@
     </div>   
     <div class="form-row">
       <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
-    </div>        
-    <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
+    </div>
+    <div class="form-row">
+    <!-- <div class="form-row" v-if="status == 'error_create'"> -->
       Adresse mail déjà utilisée
     </div>
-    <div class="form-row">      
-      <button @click="register()" class="button" :class="{'button--disabled' : !validatedFields}">
+    <div class="form-row">
+      <button @click="register()" class="button">
+      <!-- <button @click="register()" class="button" :class="{'button--disabled' : !validatedFields}"> -->
         <span v-if="status == 'loading'">Création en cours...</span>
         <span v-else>Créer mon compte</span>
       </button>     
@@ -57,19 +58,36 @@ export default {
     ...mapState(['status', 'user'])
   },
   methods: {
+    // register: function () {
+    //   const self = this;
+    //   this.$store.dispatch('register', {
+    //     email: this.email,
+    //     firstName: this.firstName,
+    //     lastName: this.lastName,
+    //     password: this.password,
+    //   }).then(function () {
+    //     self.login();
+    //   }, function (error) {
+    //     console.log(error);
+    //   })
+    // ,
     register: function () {
-      const self = this;
+      // const self = this;
       this.$store.dispatch('register', {
         email: this.email,
         firstName: this.firstName,
         lastName: this.lastName,
         password: this.password,
-      }).then(function () {
-        self.login();
-      }, function (error) {
-        console.log(error);
-      })
-    }   
+      });      
+      // .then(
+      //   function () {
+      //   self.$router.push('/account');
+      //   },
+      //   function (error) {
+      //   console.log(error);
+      //   }
+      // )
+    }
   }
 };
 </script>

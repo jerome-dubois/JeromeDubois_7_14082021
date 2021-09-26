@@ -22,6 +22,12 @@ exports.createPost = (req, res, next) => {
     // console.log("userId",userId);
     // console.log("req.body.userId",req.body.userId);
     console.log("req.body",req.body);
+    console.log("req.file",req.file);
+    console.log("req.protocol",req.protocol);
+    // console.log("req.file.filename",req.file.filename);
+    console.log("req.body.file",req.body.file);
+
+
     // console.log("req.body.Post",req.body.Post);
     // console.log("req.body.Post.content",req.body.Post.content);
     const postObject = req.body.Post;
@@ -29,11 +35,17 @@ exports.createPost = (req, res, next) => {
     //     userId: userId,
     //     content: req.body.content,
     //     imageUrl: req.body.imageUrl
-    // });    
+    // });
+    
+    // if (req.file) {
+    //     postObject.imageUrl = `${req.protocol}://${req.get('host')}/public/${
+    //       req.file.filename
+    //     }`
+    //   }
+
     const post = new Post({
         ...postObject,
-        userId: userId,         
-        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        userId: userId
     });
     post.save()
         .then(() => res.status(201).json({ message: 'Post registered !'}))
@@ -57,16 +69,17 @@ exports.modifyPost = (req, res, next) => {
     // console.log("req.body.Post",req.body.Post);
     // console.log("req.body.Post.content",req.body.Post.content);
     // Si la modification de l'objet post implique un changement d'image
-    // if (req.file) {
+    if (req.file) {
         // Alors on recherche l'objet à modifier
-        // Post.findOne({ id: req.params.id })
-        // Post.findOne({ id: req.body.id })
+        Post.findOne({
+            where: { id: req.params.id }          
+        })
         // Puis on supprime l'ancienne image correspondante
-        // .then((post) => {
-        //     const filename = post.imageUrl.split('/images/')[1];
-        //     fs.unlinkSync(`images/${filename}`);  
-        // })
-    // }
+        .then((post) => {
+            const filename = post.imageUrl.split('/images/')[1];
+            fs.unlinkSync(`images/${filename}`);  
+        })
+    }
 
     /* Puis, on définit postObject comme une concaténation des valeurs du post modifié avec une nouvelle valeur d'url pour la nouvelle image si elle existe sinon on y affecte les nouvelles valeurs de post mais avec la même valeur d'url en cas d'image non modifiée*/
     const postObject = req.body;
