@@ -2,81 +2,48 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-let user = localStorage.getItem('user');
-if (!user) {
- user = {
-    userId: -1,
-    token: '',
-  }; 
-} else {
-  try {
-    user = JSON.parse(user);
-    // instance.defaults.headers.common['Authorization'] = user.token;
-  } catch (ex) {
-    user = {
-      userId: -1,
-      token: '',
-    };
-  }
-}
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 
   state: {
     status: '',
-    user: user,
+    token: '',
     userInfos: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      userId:'',
-      token:''
+      userId:''
     },
   },
   mutations: {
     SET_STATUS: function (state, status) {
       state.status = status;
-    },
-    // logUser: function (state, user) {
-    //   instance.defaults.headers.common['Authorization'] = user.token;
-    //   localStorage.setItem('user', JSON.stringify(user));
-    //   state.user = user;
-    // },
+    },    
     USER_INFOS: function (state, userInfos) {
       state.userInfos = userInfos;
     },
     LOGOUT: function (state) {
-      state.user = {
-        userId: -1,
-        token: '',
-      }
-      localStorage.removeItem('user');
+      state.token = '';
+      localStorage.removeItem('token')
     }
   },
   actions: {
     login: ({commit}, userInfos) => {
-      // commit('setStatus', 'loading');
+      commit('SET_STATUS', 'loading');
       return new Promise((resolve, reject) => {
-        // instance.post('/login', userInfos)
         axios
           .post("http://localhost:3000/api/auth/login", userInfos)
           .then(response => {
             localStorage.setItem('token',response.data.token)
-            console.log(response.data)
             // location.replace(location.origin)
           })
           .then(function (response) {
           commit('USER_INFOS', response.data);
-          })
-          // .then(
-          //   console.log(userInfos)
-          // )
+          })          
           .then(function (response) {
             commit('SET_STATUS', '');
-            // commit('logUser', response.data);
             resolve(response);
           })          
           .catch(function (error) {
