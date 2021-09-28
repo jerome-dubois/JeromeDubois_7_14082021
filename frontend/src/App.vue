@@ -125,4 +125,8 @@ img {
     background:#cecece;
   }
 
+  .row > * {
+    flex-shrink: 1 !important;
+  } 
+
 </style>

@@ -24,6 +24,10 @@ export default new Vuex.Store({
     USER_INFOS: function (state, userInfos) {
       state.userInfos = userInfos;
     },
+    TOKEN_IN_STORE: function (state, token) {
+      state.token = token;
+      console.log("token in store", state.token);
+    },
     LOGOUT: function (state) {
       state.token = '';
       localStorage.removeItem('token')
@@ -36,13 +40,10 @@ export default new Vuex.Store({
         axios
           .post("http://localhost:3000/api/auth/login", userInfos)
           .then(response => {
-            localStorage.setItem('token',response.data.token)
-            // location.replace(location.origin)
-          })
-          // .then(function (response) {
-          // commit('USER_INFOS', response.data);
-          // })          
-          .then(function (response) {
+            localStorage.setItem('token',response.data.token);
+            commit('TOKEN_IN_STORE', response.data.token);
+          })                  
+          .then(function (response) {            
             commit('SET_STATUS', '');
             resolve(response);
           })          

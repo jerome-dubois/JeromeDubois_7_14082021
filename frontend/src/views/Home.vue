@@ -1,6 +1,6 @@
 <template>
   <div class="home mt-5">
-    <h1>This is the home page with the posts from all users</h1>
+    <!-- <h1>This is the home page with the posts from all users</h1> -->
     <AddPost />
     
     <b-row class="row justify-content-center align-items-center flex-column">
@@ -17,6 +17,7 @@
 import axios from "axios"
 import AddPost from '@/components/AddPost.vue'
 import Post from '@/components/Post.vue'
+// import $ from 'jquery'
 
 export default {
   name: 'Home',

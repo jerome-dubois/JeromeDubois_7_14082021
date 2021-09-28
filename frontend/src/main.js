@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
+// import $ from 'jquery'
 
 // Installation de BootstrapVue - Source: https://bootstrap-vue.org/docs
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
@@ -18,7 +19,7 @@ Vue.use(BootstrapVue)
 // Installation du plugin de composants d'icône BootstrapVue
 Vue.use(IconsPlugin)
 
-new Vue({
+new Vue({  
   store,
   router,
   render: h => h(App)
