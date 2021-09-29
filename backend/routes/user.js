@@ -30,7 +30,7 @@ router.get('/users/:id', auth, userCtrl.getOneUser);
 router.get('/loggedUser', auth, userCtrl.getLoggedUser);
 
 // Renvoie le tableau de tous les users dans la base de données 
-router.get('/users/:id/posts', auth, userCtrl.getAllUserPosts);
+router.get('/users/:id/posts', auth, userCtrl.getUserAllPosts);
 
 // Supprime le user avec l'ID fourni.
 // router.delete('/:id', auth, userCtrl.deleteUser);

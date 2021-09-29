@@ -5,16 +5,16 @@
     <h1 class="card__title">Connexion</h1>
     <p class="card__subtitle">Tu n'as pas encore de compte ? <router-link to="/register" class="card__action">Créer un compte</router-link></p>
     <div class="form-row">
-      <input v-model="email" class="form-row__input" type="text" placeholder="Adresse mail"/>
+      <input v-model="email" class="form-row__input" type="text" aria-label="Écrire votre adresse mail" placeholder="Adresse mail"/>
     </div>    
     <div class="form-row">
-      <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
+      <input v-model="password" class="form-row__input" type="password" aria-label="Écrire votre mot de passe" placeholder="Mot de passe"/>
     </div>    
     <div class="form-row" v-if="status == 'error_login'">
       Adresse mail et/ou mot de passe invalide
     </div>    
     <div class="form-row">
-      <button @click="login()" class="button" :class="{'button--disabled' : !validatedFields}">
+      <button @click="login()" class="button" aria-label="Connexion" :class="{'button--disabled' : !validatedFields}">
         <span v-if="status == 'loading'">Connexion en cours...</span>
         <span v-else>Connexion</span>
       </button>      

@@ -130,7 +130,7 @@ exports.getLoggedUser = (req, res, next) => {
 };
 
 // Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de toutes les posts dans la base de données 
-exports.getAllUserPosts = (req, res, next) => {
+exports.getUserAllPosts = (req, res, next) => {
     Post.findAll({
         where: { userId: req.params.id },
         }

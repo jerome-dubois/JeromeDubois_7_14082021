@@ -17,7 +17,6 @@
 import axios from "axios"
 import AddPost from '@/components/AddPost.vue'
 import Post from '@/components/Post.vue'
-// import $ from 'jquery'
 
 export default {
   name: 'Home',

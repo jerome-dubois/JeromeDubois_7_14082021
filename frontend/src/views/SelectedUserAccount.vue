@@ -1,26 +1,27 @@
 <template>
-  <div class="home">
+  <div class="mt-5">
 
-    <h1>This is the home page with the posts from the selected user</h1>
+    <h1>This is the home page with the posts from the selected user</h1>    
 
-    <!-- <div> -->
-        <!-- <router-link
-          :to="{ name: 'SelectedUserAccount', params: { userId: post.User.id } }">
+    <b-row class="row justify-content-center align-items-center flex-column">
+      <b-col cols="12" lg="6">
+        <b-card-text class="row justify-content-center align-items-center flex-column">
           <p>
-            {{ post.User.firstName }} {{ post.User.lastName }}
+            Voici les posts de {{ userInfos.firstName }} {{ userInfos.lastName }}
           </p>
-        </router-link>
-      </div> -->
+        </b-card-text>
+      </b-col>
+    </b-row>
 
-    <b-card-text v-if="user.admin==true">    
-    <!-- <b-card-text> -->
-
-        {{ user.firstName }}
-        <!-- {{ $store.state.user }} -->
-        <!-- {{user.firstName}} -->
-    </b-card-text>    
-
-    <Post v-for="post in userposts" v-bind:key="post.id" :post="post" />
+    <b-row class="row justify-content-center align-items-center flex-column">
+      <b-col cols="12" lg="6">
+        <b-card-text class="row justify-content-center align-items-center flex-column">
+          <Post v-for="post in userPosts" v-bind:key="post.id" :post="post" />
+        </b-card-text>
+      </b-col>
+    </b-row>
+    
+    <!-- <b-card-text v-if="user.admin==true">     -->        
 
   </div>
 </template>
@@ -32,7 +33,7 @@ import Post from '@/components/Post.vue'
 import { mapState } from "vuex"
 
 export default {
-  name: 'Home',
+  name: 'SelectedUserAccount',
   components: {
     Post
   },
@@ -42,8 +43,9 @@ export default {
         id: "",
         content: "",
         imageUrl: ""
-      },        
-      userposts: [],      
+      },
+      userInfos: [],      
+      userPosts: [],      
     };
   },
   computed: {
@@ -57,12 +59,26 @@ export default {
         }
       })
       .then(response => {
-        this.userposts = response.data;
-        console.log("selected user posts", this.userposts);        
+        this.userPosts = response.data;
+        console.log("selected user posts", this.userPosts);       
       })
       .catch(error => {
         console.log(error);
+      });
+    axios
+      .get(`http://localhost:3000/api/users/${this.$route.params.userId}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
       })
+      .then(response => {
+        this.userInfos = response.data;
+        console.log("selected user infos", this.userInfos);        
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
   },
 }
 </script>

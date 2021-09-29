@@ -2,7 +2,15 @@
   <div class="selected-post">
     <h1>This is the selected Post view</h1>
 
-    <Post v-if="post" :post="post" />
+    <!-- <Post v-if="post" :post="post" /> -->
+
+    <b-row class="row justify-content-center align-items-center flex-column">
+      <b-col cols="12" lg="6">
+        <b-card-text class="row justify-content-center align-items-center flex-column">
+          <Post :post="post" />
+        </b-card-text>
+      </b-col>
+    </b-row>
 
     <!-- <b-card-text v-if="post">
       {{ post }}

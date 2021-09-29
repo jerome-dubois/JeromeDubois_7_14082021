@@ -6,21 +6,21 @@
         <p class="card__subtitle" >Tu as déjà un compte ? <router-link to="/login" class="card__action">Se connecter</router-link></p>
     </div>
     <div class="form-row">
-      <input v-model="email" class="form-row__input" type="text" placeholder="Adresse mail"/>
+      <input v-model="email" class="form-row__input" type="text" aria-label="Écrire votre adresse mail" placeholder="Adresse mail"/>
     </div>
     <div class="form-row">
-      <input v-model="firstName" class="form-row__input" type="text" placeholder="Prénom"/>
-      <input v-model="lastName" class="form-row__input" type="text" placeholder="Nom"/>
+      <input v-model="firstName" class="form-row__input" type="text" aria-label="Écrire votre prénom" placeholder="Prénom"/>
+      <input v-model="lastName" class="form-row__input" type="text" aria-label="Écrire votre nom" placeholder="Nom"/>
     </div>   
     <div class="form-row">
-      <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
+      <input v-model="password" class="form-row__input" type="password" aria-label="Écrire votre mot de passe" placeholder="Mot de passe"/>
     </div>    
     <div class="form-row" v-if="status == 'error_create'">
       Adresse mail déjà utilisée
     </div>
     <div class="form-row">
       <!-- <button @click="register()" class="button"> -->
-      <button @click="register()" class="button" :class="{'button--disabled' : !validatedFields}">
+      <button @click="register()" class="button" aria-label="S'inscrire" :class="{'button--disabled' : !validatedFields}">
         <span v-if="status == 'loading'">Création en cours...</span>
         <span v-else>Créer mon compte</span>
       </button>

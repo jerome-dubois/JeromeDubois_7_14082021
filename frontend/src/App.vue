@@ -105,6 +105,13 @@ img {
     padding: 16px;
     transition: .4s background-color;
   }
+
+  .btn-disconnect {
+    color: #fff!important;
+    background-color: #fd2d01!important;
+    // border-color: #fd2d01;
+  }
+
   .card__action {
     color:#2196F3;
     text-decoration: underline;

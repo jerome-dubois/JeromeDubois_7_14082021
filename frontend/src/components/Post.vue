@@ -1,26 +1,42 @@
 <template>
   
   <div class="post">
-    <b-card>
+    <b-card>      
       
-      <!-- <div> -->
-        <!-- <router-link
-          :to="{ name: 'SelectedUserAccount', params: { userId: post.User.id } }">
-          <p>
-            {{ post.User.firstName }} {{ post.User.lastName }}
-          </p>
-        </router-link>
-      </div> -->
-
       <ModifyPost :post="post" />
 
-      <b-card-text v-if="post.id">
+      <!-- <b-card-text v-if="post.id"> -->
+
+      <div>
+        <router-link
+          :to="{ name: 'SelectedUserAccount', params: { userId: post.userId } }">
+          <!-- <p>
+            {{ post.User.firstName }} {{ post.User.lastName }}
+          </p> -->
+
+          <b-card-text>
+            <span>UserId: {{ post.userId }}</span>
+          </b-card-text>
+
+        </router-link>
+      </div>  
+
+      <!-- <b-card-text v-if="post.id">
           <span>Post id: {{ post.id }}</span>
-      </b-card-text>
+      </b-card-text> -->
+
+      <router-link
+          :to="{ name: 'SelectedPost', params: { postId: post.id } }"
+      >          
+          <b-card-text class="text-left mt-3 mb-0 mb-lg-3">
+              <span>Post id: {{ post.id }}</span>
+          </b-card-text>
+
+      </router-link>
 
       <b-card-text class="text-left mt-3 mb-0 mb-lg-3" v-if="post.content">
           <span>Post content: {{ post.content }}</span>
-      </b-card-text>
+      </b-card-text>          
 
       <div
         class="post d-flex align-items-center justify-content-center my-1 mb-lg-4"
@@ -71,13 +87,7 @@ export default {
   name: 'Post',
   components: {
     ModifyPost
-  },
-  // props: {
-  //   post: {
-  //     type: Object,
-  //     required: true
-  //   }
-  // },
+  },  
   props: ['post'],
   // computed: {
   //   ...mapState("user")

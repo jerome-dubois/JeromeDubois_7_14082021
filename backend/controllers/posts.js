@@ -58,8 +58,8 @@ exports.modifyPost = (req, res, next) => {
     // console.log("req.body",req.body);
     // console.log("req.params.id",req.params.id);
     console.log("req.body",req.body);
-    console.log("req.file",req.file);
-    console.log("req.file.filename",req.file.filename);
+    // console.log("req.file",req.file);
+    // console.log("req.file.filename",req.file.filename);
     // console.log("req.body.Post",req.body.Post);
     // console.log("req.body.Post.content",req.body.Post.content);
     // Si la modification de l'objet post implique un changement d'image
