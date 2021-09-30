@@ -25,20 +25,33 @@ exports.register = (req, res, next) => {
     if (!emailRegex.test(req.body.email)) {
         return res.status(400).json({ error: 'Votre email n\'est pas valide !'})
     } else {
-        bcrypt.hash(req.body.password, 10)
-        .then(hash => {           
-            // Création du nouvel utilisateur avec le mot de passe haché
-            const user = new User({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: hash
-            });
-            user.save()
-              .then(() => res.status(201).json({ message: 'User created !' }))
-              .catch(error => res.status(400).json({ error }));
-        })
-        .catch(error => res.status(500).json({ error }));
+
+        User.findOne({
+            where: { email: req.body.email },
+            })        
+            .then(user => {
+                
+                   if (!user) {
+                    bcrypt.hash(req.body.password, 10)
+                    .then(hash => {           
+                        // Création du nouvel utilisateur avec le mot de passe haché
+                        const user = new User({
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
+                            email: req.body.email,
+                            password: hash
+                        });
+                        user.save()
+                        .then(() => res.status(201).json({ message: 'User created !' }))
+                        .catch(error => res.status(400).json({ error }));
+                    })
+                    .catch(error => res.status(500).json({ error }));
+                   } else {
+                    res.status(409).json({ error: 'Cette utilisateur existe déjà ' })
+                   }
+    
+            })
+            .catch(error => res.status(500).json({ error }));        
     }
      
 };

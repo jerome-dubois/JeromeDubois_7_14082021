@@ -112,10 +112,19 @@ exports.getOnePost = (req, res, next) => {
         //     }          
         // ]
         })
-        .then(post => res.status(200).json(post))
-        .catch(error => res.status(404).json({ error }));
+        .then(
+                function(post) { res.status(200).json(post) },
+                function(error) { res.status(404).json({ error }) }
+            );
+        // .then(post => res.status(200).json(post))
+        // .catch(error => res.status(404).json({ error }));
         
 };
+
+// User.find(options).then(
+//     function(user) { ... },
+//     function(err) { ... }
+//   );
 
 // Définition et export de la logique métier appliquée à la route delete qui supprime le post avec l'ID fourni
 exports.deletePost = (req, res, next) => {
