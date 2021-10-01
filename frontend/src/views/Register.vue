@@ -16,7 +16,7 @@
       <input v-model="password" class="form-row__input" type="password" aria-label="Écrire votre mot de passe" placeholder="Mot de passe"/>
     </div>    
     <div class="form-row" v-if="status == 'error_create'">
-      Adresse mail déjà utilisée
+      Adresse mail déjà utilisée ou mot de passe invalide
     </div>
     <div class="form-row">
       <!-- <button @click="register()" class="button"> -->

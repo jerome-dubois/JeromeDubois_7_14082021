@@ -5,6 +5,7 @@
         <b-form-textarea        
           :value="value"
           @input="updateValue"
+          aria-label="Écrire une publication"
         ></b-form-textarea>
 
         <!-- <b-form-input
@@ -28,6 +29,7 @@
         <button          
           @click="triggerInput"
           type="button"
+          aria-label="Choisir un fichier"
         >
           <span>Choisir un fichier</span>
           
