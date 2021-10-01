@@ -1,7 +1,7 @@
 // Import du schéma de données Post défini comme modèle via Sequelize
 
 const db = require('../models');
-const { Post } = db.sequelize.models;
+const { User, Post } = db.sequelize.models;
 
 // Import de 'file system' de Node pour la gestion des fichiers (dont le téléchargement)
 const fs = require('fs');
@@ -148,7 +148,13 @@ exports.deletePost = (req, res, next) => {
 
 // Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de toutes les posts dans la base de données 
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll()
+    Post.findAll({
+        include: [{
+            model: User,
+            attributes: ['firstName','lastName']
+        }],
+        order: [['createdAt', 'DESC']]
+    })
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };

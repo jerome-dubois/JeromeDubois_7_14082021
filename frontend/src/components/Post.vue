@@ -15,7 +15,8 @@
           </p> -->
 
           <b-card-text>
-            <span>UserId: {{ post.userId }}</span>
+            <!-- <span>UserId: {{ post.userId }}</span> -->
+            <div>Posté par <em class="text-secondary">{{post.User.firstName}} {{post.User.lastName}}</em> le <em class="text-secondary">{{post.createdAt.split(' ')[0]}}</em> à <em class="text-secondary">{{post.createdAt.split(' ')[1]}}</em></div>
           </b-card-text>
 
         </router-link>
