@@ -146,6 +146,10 @@ exports.getLoggedUser = (req, res, next) => {
 exports.getUserAllPosts = (req, res, next) => {
     Post.findAll({
         where: { userId: req.params.id },
+        include: [{
+            model: User,
+            attributes: ['firstName','lastName']
+        }]
         }
         )
         .then(posts => res.status(200).json(posts))

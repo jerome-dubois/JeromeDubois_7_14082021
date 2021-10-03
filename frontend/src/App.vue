@@ -98,7 +98,8 @@ img {
     background: #fd2d01;
     color:#ffffff;
     border-radius: 8px;
-    font-weight: 800;
+    // font-weight: 800;
+    font-weight: bold!important;
     font-size: 15px;
     border: none;
     width: 100%;

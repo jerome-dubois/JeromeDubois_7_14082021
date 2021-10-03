@@ -1,6 +1,6 @@
 <template>
 
-  <div>           
+  <div class="my-5 mt-5">           
     
     <h3>Créer un post</h3>
 

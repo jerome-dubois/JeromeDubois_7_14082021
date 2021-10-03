@@ -1,13 +1,15 @@
 <template>
-  <div class="home mt-5">
+  <div class="mt-5 home">
     <!-- <h1>This is the home page with the posts from all users</h1> -->
     <AddPost />
     
     <b-row class="row justify-content-center align-items-center flex-column">
-      <b-col cols="12" lg="6">
-        <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
+      <b-col cols="12" lg="12">
+        <b-card-text class="row justify-content-center align-items-center flex-column">
+          <Post v-for="post in posts" v-bind:key="post.id" :post="post" />
+        </b-card-text>
       </b-col>
-    </b-row>   
+    </b-row> 
 
   </div>
 </template>
@@ -51,3 +53,10 @@ export default {
   },
 }
 </script>
+
+<style>
+  .home {
+    margin-top: 100px!important;
+  }
+   
+</style>

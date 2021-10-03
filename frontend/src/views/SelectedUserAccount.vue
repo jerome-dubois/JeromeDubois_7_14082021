@@ -1,21 +1,19 @@
 <template>
-  <div class="mt-5">
-
-    <h1>This is the home page with the posts from the selected user</h1>    
+  <div class="mt-5 home">
 
     <b-row class="row justify-content-center align-items-center flex-column">
-      <b-col cols="12" lg="6">
+      <b-col cols="12" lg="8">
         <b-card-text class="row justify-content-center align-items-center flex-column">
-          <p>
+          <h1>
             Voici les posts de {{ userInfos.firstName }} {{ userInfos.lastName }}
-          </p>
+          </h1>
         </b-card-text>
       </b-col>
     </b-row>
 
     <b-row class="row justify-content-center align-items-center flex-column">
-      <b-col cols="12" lg="6">
-        <b-card-text class="row justify-content-center align-items-center flex-column">
+      <b-col cols="12" lg="8">
+        <b-card-text class="row justify-content-center align-items-center flex-column mx-auto">
           <Post v-for="post in userPosts" v-bind:key="post.id" :post="post" />
         </b-card-text>
       </b-col>

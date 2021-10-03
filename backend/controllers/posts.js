@@ -106,6 +106,10 @@ exports.modifyPost = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {      
     Post.findOne({
         where: { id: req.params.id },
+        include: [{
+            model: User,
+            attributes: ['firstName','lastName']
+        }]
         // include: [
         //     {
         //         model: db.User
@@ -129,7 +133,7 @@ exports.getOnePost = (req, res, next) => {
 // Définition et export de la logique métier appliquée à la route delete qui supprime le post avec l'ID fourni
 exports.deletePost = (req, res, next) => {
     Post.findOne({
-        where: { id: req.params.id },
+        where: { id: req.params.id }        
         })
         .then(post => {
             // const filename = post.imageUrl.split('/images/')[1];

@@ -12,7 +12,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- <router-link class="navbar-brand" to="/"> -->
-    <router-link to="/home">
+    <router-link to="/home" aria-hidden="true">
       <img class="w-50" src="../assets/icon-left-font-monochrome-orange.svg" alt="Logo Groupomania" />
     </router-link>
 
@@ -40,7 +40,7 @@
         </li>
         <li class="nav-item">
         <!-- <li class="nav-item" v-if="token!==null"> -->
-          <button type="button" class="btn btn-disconnect" aria-label="Se déconnecter" @click="disconnect">Se déconnecter</button>
+          <button type="button" class="button btn btn-disconnect" aria-label="Se déconnecter" @click="disconnect">Se déconnecter</button>
         </li>
       </ul>
     </div>

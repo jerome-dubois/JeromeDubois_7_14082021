@@ -1,8 +1,11 @@
 <template>
   <div>
-    <b-form-group>
+    <b-form-group
+      label-for="post-content"
+    >
       <div>        
-        <b-form-textarea        
+        <b-form-textarea
+          id="post-content"     
           :value="value"
           @input="updateValue"
           aria-label="Écrire une publication"
@@ -24,12 +27,15 @@
 
     </b-form-group> 
         
-    <b-form-group>
+    <b-form-group
+          label-for="post-file"    
+    >
       <div>
         <button          
           @click="triggerInput"
           type="button"
           aria-label="Choisir un fichier"
+          class="btn-post"
         >
           <span>Choisir un fichier</span>
           
@@ -38,17 +44,20 @@
         <button
           v-if="isCreating"
           type="submit"
+          aria-label="Publier un post"
+          class="btn-post"
         >
           <span>Publier un post</span>
           
         </button>
         
         <input
+          id="post-file"
           ref="fileInput"
           class="d-none"
           type="file"
           name="image"
-          @change="onFileSelected"
+          @change="onFileSelected"          
         />
 
       </div>
@@ -92,3 +101,19 @@ export default {
   }
 }
 </script>
+
+<style>
+  
+  .btn-post {
+    color: #fd2d01;
+    background:#ffffff;
+    border-radius:8px;
+    font-weight: bold!important;
+    font-size: 15px;
+    border: none;
+    width: 40%;
+    padding: 16px;
+    margin: 3px;
+  }
+  
+</style>

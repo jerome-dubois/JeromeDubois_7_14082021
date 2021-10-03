@@ -9,35 +9,32 @@
 
       <div>
         <router-link
-          :to="{ name: 'SelectedUserAccount', params: { userId: post.userId } }">
-          <!-- <p>
-            {{ post.User.firstName }} {{ post.User.lastName }}
-          </p> -->
-
+          :to="{ name: 'SelectedUserAccount', params: { userId: post.userId } }">        
           <b-card-text>
             <!-- <span>UserId: {{ post.userId }}</span> -->
-            <div>Posté par <em class="text-secondary">{{post.User.firstName}} {{post.User.lastName}}</em> le <em class="text-secondary">{{post.createdAt.split(' ')[0]}}</em> à <em class="text-secondary">{{post.createdAt.split(' ')[1]}}</em></div>
+            <div>Posté par <em class="text-secondary">{{post.User.firstName}} {{post.User.lastName}}</em> le <em class="text-secondary">{{post.createdAt.split('T')[0]}}</em> à <em class="text-secondary">{{post.createdAt.split('T')[1]}}</em></div>
           </b-card-text>
 
         </router-link>
-      </div>  
+      </div>      
 
-      <!-- <b-card-text v-if="post.id">
-          <span>Post id: {{ post.id }}</span>
-      </b-card-text> -->
-
-      <router-link
+      <!-- <router-link
           :to="{ name: 'SelectedPost', params: { postId: post.id } }"
       >          
           <b-card-text class="text-left mt-3 mb-0 mb-lg-3">
               <span>Post id: {{ post.id }}</span>
           </b-card-text>
 
-      </router-link>
+      </router-link> -->
 
-      <b-card-text class="text-left mt-3 mb-0 mb-lg-3" v-if="post.content">
-          <span>Post content: {{ post.content }}</span>
-      </b-card-text>          
+       <router-link
+          :to="{ name: 'SelectedPost', params: { postId: post.id } }"
+      >          
+          <b-card-text class="text-left mt-3 mb-0 mb-lg-3" v-if="post.content">
+            <span>Description: {{ post.content }}</span>
+          </b-card-text>  
+
+      </router-link>       
 
       <div
         class="post d-flex align-items-center justify-content-center my-1 mb-lg-4"
@@ -61,18 +58,7 @@
           </div>
           <div slot="modal-footer"></div>
         </b-modal>
-      </div>
-
-      <!-- <b-card-text v-if="post.imageUrl">
-          <span>Post imageUrl: {{ post.imageUrl }}</span>
-      </b-card-text> -->
-
-      <!-- <div v-if="post.imageUrl">
-        <img      
-        :src="post.imageUrl"
-        alt=""
-        />
-      </div> -->
+      </div>      
 
     </b-card> 
     
