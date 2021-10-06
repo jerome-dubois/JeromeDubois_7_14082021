@@ -136,15 +136,18 @@ exports.deletePost = (req, res, next) => {
         where: { id: req.params.id }        
         })
         .then(post => {
-            // const filename = post.imageUrl.split('/images/')[1];
-            // fs.unlink(`images/${filename}`, () => {
+            const filename = post.imageUrl.split('/images/')[1];
+            fs.unlink(`images/${filename}`, () => {
+                post.destroy({ id: req.params.id })
+                    .then(() => res.status(200).json({message : 'Post deleted !'}))
+                    .catch(error => res.status(400).json({ error }));
             //     Post.deleteOne({ id: req.params.id })
             //         .then(() => res.status(200).json({message : 'Post deleted !'}))
             //         .catch(error => res.status(400).json({ error }));
-            // });
-            post.destroy({ id: req.params.id })
-                    .then(() => res.status(200).json({message : 'Post deleted !'}))
-                    .catch(error => res.status(400).json({ error }));
+            });
+            // post.destroy({ id: req.params.id })
+            //         .then(() => res.status(200).json({message : 'Post deleted !'}))
+            //         .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));       
 };
