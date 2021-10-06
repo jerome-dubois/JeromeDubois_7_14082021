@@ -16,7 +16,7 @@
       <input v-model="password" class="form-row__input" type="password" aria-label="Écrire votre mot de passe" placeholder="Mot de passe"/>
     </div>    
     <div class="form-row" v-if="status == 'error_create'">
-      Adresse mail déjà utilisée ou mot de passe invalide
+      Adresse mail déjà utilisée ou invalide ou mot de passe invalide
     </div>
     <div class="form-row">
       <!-- <button @click="register()" class="button"> -->
@@ -62,7 +62,7 @@ export default {
   computed: {
     validatedFields: function () {
 
-      if (this.email != "" && this.prenom != "" && this.nom != "" && this.password != "") {
+      if (this.email != "" && this.firstName != "" && this.lastName!= "" && this.password != "") {
           return true;
         } else {
           return false;
@@ -89,6 +89,30 @@ export default {
       
     },    
     register: function () {
+
+      // if (
+      //   this.input.firstName != '' &&
+      //   this.input.lastName != '' &&
+      //   this.input.email != '' &&
+      //   this.input.password != ''
+      // ) {
+        
+      //     const self = this;
+      //     this.$store.dispatch('register', {
+      //       email: this.email,
+      //       firstName: this.firstName,
+      //       lastName: this.lastName,
+      //       password: this.password
+      //     }).then(function () {
+      //       self.login();
+      //     }, function (error) {
+      //       console.log(error);
+      //     })
+
+      // } else {
+      //   this.errorMessage = 'Veuillez renseigner un email et un mot de passe'
+      // }
+
       const self = this;
       this.$store.dispatch('register', {
         email: this.email,

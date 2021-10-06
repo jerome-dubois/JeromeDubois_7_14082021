@@ -75,7 +75,7 @@ export default {
       axios
       .get(`http://localhost:3000/api/posts/${this.$route.params.postId}`, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
+          Authorization: "Bearer" + localStorage.getItem("token")
         }
       })
       .then(response => {
