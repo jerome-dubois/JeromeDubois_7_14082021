@@ -26,14 +26,18 @@ git clone https://github.com/jerome-dubois/JeromeDubois_7_14082021.git
 
 #### MySQL
 
-Configure config/config.json and make sure the username and password match your local MySQL credentials.
+Configure backend/config/config.json and make sure the username and password match your local MySQL credentials.
 
 Then, you can create database with:
 
 cd backend
+
+npm install
+
 npx sequelize-cli db:create
 
 And then, you can create tables defined in migration files with the following command:
+
 npx sequelize-cli db:migrate
 
 #### Launching
