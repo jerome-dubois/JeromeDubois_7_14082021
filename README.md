@@ -32,6 +32,8 @@ Then, you can create database with:
 
 cd backend
 
+npm install
+
 npx sequelize-cli db:create
 
 And then, you can create tables defined in migration files with the following command:
