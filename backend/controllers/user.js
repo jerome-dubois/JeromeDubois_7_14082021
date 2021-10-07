@@ -47,7 +47,7 @@ exports.register = (req, res, next) => {
                     })
                     .catch(error => res.status(500).json({ error }));
                    } else {
-                    res.status(409).json({ error: 'Cette utilisateur existe déjà ' })
+                    res.status(409).json({ error: 'Cet utilisateur existe déjà ' })
                    }
     
             })
