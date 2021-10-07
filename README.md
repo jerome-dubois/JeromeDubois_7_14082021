@@ -35,6 +35,7 @@ cd backend
 npx sequelize-cli db:create
 
 And then, you can create tables defined in migration files with the following command:
+
 npx sequelize-cli db:migrate
 
 #### Launching
