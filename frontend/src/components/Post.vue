@@ -67,7 +67,7 @@
 </template>
 
 <script>
-// import { mapState } from "vuex";
+import { mapState } from "vuex";
 import ModifyPost from './ModifyPost'
 
 export default {
@@ -79,6 +79,9 @@ export default {
   // computed: {
   //   ...mapState("user")
   // }
+  computed: {
+    ...mapState(["userInfos"])
+  },
   methods: {
     // emitPost() {
     //   this.$emit("post", { post: this.post });

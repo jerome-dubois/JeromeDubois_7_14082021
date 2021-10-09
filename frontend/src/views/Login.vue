@@ -63,18 +63,22 @@ export default {
 
     login: function () {
       const self = this;
+      // this.$store.dispatch('getUserInfos');
+      console.log("userInfos in store_debut",this.$store.state.userInfos);
       this.$store.dispatch('login', {
-            email: this.email,
-            password: this.password,
-      })     
+          email: this.email,
+          password: this.password,
+      })
+      // .then(this.$store.dispatch('getUserInfos'))
       .then(
         function () {
-        self.$router.push('/account');
+        self.$router.push('/home');
         },
         function (error) {
         console.log(error);
         }
-      )
+      );
+      console.log("userInfos in store_fin",this.$store.state.userInfos); 
       
     },
     

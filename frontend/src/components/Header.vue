@@ -56,7 +56,9 @@ export default {
   methods: {
     disconnect() {
       localStorage.clear();
-      location.replace(location.origin);
+      // location.replace(location.origin);
+      this.$router.push('/login');
+
     }
   }
 };

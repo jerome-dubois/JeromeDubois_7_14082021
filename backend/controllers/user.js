@@ -27,7 +27,7 @@ exports.register = (req, res, next) => {
     } else {
 
         User.findOne({
-            where: { email: req.body.email },
+                where: { email: req.body.email }
             })        
             .then(user => {
                 
@@ -60,7 +60,8 @@ exports.register = (req, res, next) => {
 exports.login = (req, res, next) => {
     
     User.findOne({
-        where: { email: req.body.email },
+        // attributes: ['id', 'firstName','lastName','email'],
+        where: { email: req.body.email }
         })        
         .then(user => {
             console.log("user.email", user.email)

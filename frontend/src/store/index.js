@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex)
 
@@ -40,8 +41,11 @@ export default new Vuex.Store({
         axios
           .post("http://localhost:3000/api/auth/login", userInfos)
           .then(response => {
+            console.log(response.data);
+            commit('USER_INFOS', response.data);
+            // console.log("userInfos in store",this.$store.state.userInfos);
             localStorage.setItem('token',response.data.token);
-            commit('TOKEN_IN_STORE', response.data.token);
+            commit('TOKEN_IN_STORE',response.data.token);
           })                  
           .then(function (response) {            
             commit('SET_STATUS', '');
@@ -61,7 +65,7 @@ export default new Vuex.Store({
         axios
           .post("http://localhost:3000/api/auth/register", userInfos)          
           .then(response => {
-            console.log(response.data);
+            console.log(response.data);            
           })
           .then(function (response) {
             commit('SET_STATUS', 'created');
@@ -76,7 +80,7 @@ export default new Vuex.Store({
     },
 
     getUserInfos: ({commit}) => {
-
+      // commit;
       axios
       .get("http://localhost:3000/api/loggedUser", {
         headers: {
@@ -84,13 +88,14 @@ export default new Vuex.Store({
         }
       })
       .then(function (response) {
-        console.log("logged user response", response);
+        console.log("logged user response", response.data);
         commit('USER_INFOS', response.data);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
 
     }
 
-  }
+  },
+  plugins: [createPersistedState()]
 
 })

@@ -4,12 +4,17 @@
           <span>Post id: {{ post.id }}</span>
     </b-card-text> -->
     
-    <button v-b-toggle.collapse-1>   
-       ...     
+    <button v-b-toggle.collapse-1
+      v-if="post.userId == userInfos.userId"
+      class="modify-button"
+    >   
+       <i class="fas fa-trash-alt fa-2x"></i>     
     </button>
 
-    <b-collapse id="collapse-1">
-        
+    <b-collapse 
+      id="collapse-1"
+      v-if="post.userId == userInfos.userId"
+    >
       <b-card> 
         
         <b-modal
@@ -18,6 +23,7 @@
         ok-title="Enregistrer le post"        
         @ok="updatePost"
         ok-only
+        
          >
             <b-form>
               <PostForm
@@ -31,7 +37,7 @@
         <p>
           
           <b-button
-            v-b-modal="`modal-${post.id}`"            
+            v-b-modal="`modal-${post.id}`"          
           >
             <span>Modifier le post</span>
           </b-button>
@@ -63,11 +69,12 @@ export default {
   components: {
     PostForm    
   },
-  props: ['post'],
+  props: [
+    'post'
+  ],
   data () {
     return {
         content: this.post.content,
-        // userData: JSON.parse(localStorage.getItem('userData')),
         selectedFile: null
     }
   },  
@@ -129,3 +136,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.modify-button {
+  top: 20px;
+  right: 15px;
+  padding: 1px 15px 7px !important;
+  background-color: transparent;
+  border: 0;
+  border-radius: 50rem;
+  // font-size: 1.5rem;
+  font-weight: 700;
+  color: #747474;  
+}
+</style>

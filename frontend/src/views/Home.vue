@@ -19,6 +19,7 @@
 import axios from "axios"
 import AddPost from '@/components/AddPost.vue'
 import Post from '@/components/Post.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
@@ -36,6 +37,9 @@ export default {
       posts: [],      
     };
   },
+  computed: {
+    ...mapState(["userInfos"])
+  },
   mounted () {
     axios
       .get(`http://localhost:3000/api/posts`, {
@@ -46,6 +50,7 @@ export default {
       .then(response => {        
         this.posts = response.data;
         console.log("posts", this.posts);
+        console.log("userInfos in store",this.$store.state.userInfos);
       })
       .catch(error => {
         console.log(error);

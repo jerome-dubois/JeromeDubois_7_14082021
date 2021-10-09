@@ -123,7 +123,8 @@ export default {
         self.login();
       }, function (error) {
         console.log(error);
-      })
+      });
+
     }    
   }
 };

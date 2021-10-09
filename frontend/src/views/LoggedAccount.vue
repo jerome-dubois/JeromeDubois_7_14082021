@@ -31,11 +31,11 @@ export default {
     computed: {
     ...mapState(["userInfos"])
     },
-      methods: {
-        logout: function () {
-          this.$store.commit('LOGOUT');
-          this.$router.push('/login');
-        }
+    methods: {
+      logout: function () {
+        this.$store.commit('LOGOUT');
+        this.$router.push('/login');
       }
+    }
 }
 </script>
