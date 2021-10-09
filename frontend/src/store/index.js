@@ -15,6 +15,7 @@ export default new Vuex.Store({
       lastName: '',
       email: '',
       password: '',
+      admin:'',
       userId:''
     },
   },
