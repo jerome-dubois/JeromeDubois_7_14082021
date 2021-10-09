@@ -3,8 +3,7 @@
         
     <button v-b-toggle.collapse-1
       v-if="(userInfos.admin == 1)"
-      class="modify-button"
-      :id="`${userInfos.userId}`"
+      class="modify-button"     
     >   
        <i class="fas fa-trash-alt fa-2x"></i>     
     </button>

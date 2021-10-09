@@ -31,5 +31,11 @@ router.put('/:id', auth, multer, postsCtrl.modifyPost);
 // Supprime le post avec l'ID fourni.
 router.delete('/:id', auth, postsCtrl.deletePost);
 
+router.post('/:postId/comments', auth, commentsCtrl.createComment);
+router.get('/:postId/comments/:id', auth, commentsCtrl.getOneComment);
+router.get('/:postId/comments/', auth, commentsCtrl.getAllComments);
+router.put('/:postId/comments/:id', auth, commentsCtrl.modifyComment);
+router.delete('/:postId/comments/:id', auth, commentsCtrl.deleteComment);
+
 // Enregistrement des différentes routes dans le routeur Express
 module.exports = router;
