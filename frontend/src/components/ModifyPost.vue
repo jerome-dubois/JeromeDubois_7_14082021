@@ -24,7 +24,7 @@
         @ok="updatePost"
         ok-only
         
-         >
+        >
             <b-form>
               <PostForm
                 @onFileSelected="onFileSelected"                        

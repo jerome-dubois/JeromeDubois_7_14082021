@@ -152,7 +152,6 @@ exports.deletePost = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));       
 };
 
-
 // Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de toutes les posts dans la base de données 
 exports.getAllPosts = (req, res, next) => {
     Post.findAll({

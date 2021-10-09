@@ -122,7 +122,9 @@ exports.getOneUser = (req, res, next) => {
 
 // Définition et export de la logique métier appliquée à la route delete qui supprime le user avec l'ID fourni
 exports.deleteUser = (req, res, next) => {
-    User.findOne({ id: req.params.id})
+    User.findOne({
+        where: { id: req.params.id }        
+        })
         .then(user => {            
                 user.destroy({ id: req.params.id })
                     .then(() => res.status(200).json({message : 'User deleted !'}))
@@ -131,7 +133,6 @@ exports.deleteUser = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));       
 };
 
-
 exports.getLoggedUser = (req, res, next) => {
     
     const token = req.headers.authorization.split(' ')[1];
@@ -139,7 +140,7 @@ exports.getLoggedUser = (req, res, next) => {
     const userId = decodedToken.userId;
     console.log("userId", userId);
     User.findOne({
-        attributes: ['id', 'firstName','lastName','email'],
+        attributes: ['id', 'firstName','lastName','email','admin'],
         where: { id: userId }
     })
         .then(user => res.status(200).json(user))
