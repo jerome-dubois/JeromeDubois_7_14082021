@@ -25,6 +25,11 @@ const routes = [
     component: () => import('../views/SelectedPost.vue')
   },
   {
+    path: '/users',
+    name: 'Users',
+    component: () => import('../views/Users.vue')
+  },
+  {
     path: '/account',
     name: 'LoggedAccount',
     component: () => import('../views/LoggedAccount.vue')

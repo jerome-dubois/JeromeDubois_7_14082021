@@ -96,7 +96,11 @@ exports.login = (req, res, next) => {
 
 // Définition et export de la logique métier appliquée à la route get qui renvoie le tableau de tous les users dans la base de données 
 exports.getAllUsers = (req, res, next) => {
-    User.findAll()
+    User.findAll(
+        // {
+        //   order: [['createdAt', 'DESC']]
+        // }
+        )
         .then(users => res.status(200).json(users))
         .catch(error => res.status(400).json({ error }));
 };
@@ -117,16 +121,15 @@ exports.getOneUser = (req, res, next) => {
 };
 
 // Définition et export de la logique métier appliquée à la route delete qui supprime le user avec l'ID fourni
-// exports.deleteUser = (req, res, next) => {
-//     USer.findOne({ _id: req.params.id})
-//         .then(user => {            
-//                 User.deleteOne({ _id: req.params.id })
-//                     .then(() => res.status(200).json({message : 'User deleted !'}))
-//                     .catch(error => res.status(400).json({ error }));
-//             });
-//         })
-//         .catch(error => res.status(500).json({ error }));       
-// };
+exports.deleteUser = (req, res, next) => {
+    User.findOne({ id: req.params.id})
+        .then(user => {            
+                user.destroy({ id: req.params.id })
+                    .then(() => res.status(200).json({message : 'User deleted !'}))
+                    .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));       
+};
 
 
 exports.getLoggedUser = (req, res, next) => {

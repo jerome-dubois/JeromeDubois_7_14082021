@@ -23,6 +23,10 @@
         <!-- <li class="nav-item" v-if="token!==null"> -->
           <router-link class="nav-link" aria-label="Accueil" to="/home">Accueil</router-link>
         </li>
+        <li class="nav-item">
+        <!-- <li class="nav-item" v-if="token!==null"> -->
+          <router-link class="nav-link" aria-label="Utilisateurs" to="/users">Utilisateurs</router-link>
+        </li>
         <!-- <li class="nav-item" v-if="token==null"> -->
         <li class="nav-item">
           <router-link class="nav-link" aria-label="S'inscrire" to="/register">S'inscrire</router-link>

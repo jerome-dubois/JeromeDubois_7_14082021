@@ -33,7 +33,7 @@ router.get('/loggedUser', auth, userCtrl.getLoggedUser);
 router.get('/users/:id/posts', auth, userCtrl.getUserAllPosts);
 
 // Supprime le user avec l'ID fourni.
-// router.delete('/:id', auth, userCtrl.deleteUser);
+router.delete('/users/:id', auth, userCtrl.deleteUser);
 
 // Enregistrement des différentes routes dans le routeur Express
 module.exports = router;
