@@ -1,11 +1,8 @@
 <template>
   <div>
-    <!-- <b-card-text v-if="post.id">
-          <span>Post id: {{ post.id }}</span>
-    </b-card-text> -->
-    
+       
     <button v-b-toggle.collapse-1
-      v-if="(post.userId == userInfos.userId) || (userInfos.admin == 1) || (userInfos.admin == 2)"
+      v-if="(post.userId == userInfos.userId) || (post.userId == userInfos.id) || (userInfos.admin == 1) || (userInfos.admin == 2)"
       class="modify-button"
     >   
        <i class="fas fa-trash-alt fa-2x"></i>     
@@ -13,7 +10,7 @@
 
     <b-collapse 
       id="collapse-1"
-      v-if="(post.userId == userInfos.userId) || (userInfos.admin == 1) || (userInfos.admin == 2)"
+      v-if="(post.userId == userInfos.userId) || (post.userId == userInfos.id) || (userInfos.admin == 1) || (userInfos.admin == 2)"
     >
       <b-card> 
         
