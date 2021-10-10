@@ -1,6 +1,7 @@
 <template>
   
   <div class="post">
+
     <b-card>      
       
       <ModifyPost :post="post" />
@@ -58,34 +59,35 @@
           </div>
           <div slot="modal-footer"></div>
         </b-modal>
-      </div>      
+      </div>
 
-    </b-card> 
+      <Comments :post="post" />
+
+    </b-card>
     
   </div>
 
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
 import ModifyPost from './ModifyPost'
+import Comments from './Comments'
 
 export default {
   name: 'Post',
   components: {
-    ModifyPost
+    ModifyPost,
+    Comments
   },  
   props: ['post'],
-  // computed: {
-  //   ...mapState("user")
-  // }
   computed: {
     ...mapState(["userInfos"])
   },
-  methods: {
+  // methods: {
     // emitPost() {
     //   this.$emit("post", { post: this.post });
     // }
-  }
+  // }
 }
 </script>

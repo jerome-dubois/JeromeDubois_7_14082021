@@ -15,15 +15,16 @@ exports.createComment = (req, res, next) => {
     const comment = new Comments({
         ...req.body,
         postId: req.params.postId,
-        userId: req.user.id
+        userId: req.body.userId
     });
+    console.log("req.body",req.body);
     comment
-        .findOne({
-        where: { id: comment.id },
-        include: [{
-            model: User
-        }]          
-        })
+        // .findOne({
+        // where: { id: comment.id },
+        // include: [{
+        //     model: User
+        // }]          
+        // })
         .save()
         .then(() => res.status(201).json({ message: 'Comment registered !'}))
         .catch(error => res.status(400).json({ error }));
@@ -31,12 +32,14 @@ exports.createComment = (req, res, next) => {
 };
 
 exports.modifyComment = (req, res, next) => {
-    
+    console.log("req.body", req.body);
+
     Comments.findOne({
-        where: { id: req.params.id, userId: req.user.id },
-        include: [{
-            model: User
-        }]          
+        // where: { id: req.params.id, userId: req.user.id },
+        where: { id: req.params.id },
+        // include: [{
+        //     model: User
+        // }]          
     })
     .then((comment) => {
         comment.update(req.body)

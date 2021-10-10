@@ -13,6 +13,9 @@ const multer = require('../middleware/multer-config');
 // Import du controller posts.js avec déclaration de postsCtrl
 const postsCtrl = require('../controllers/posts');
 
+// Import du controller posts.js avec déclaration de commentsCtrl
+const commentsCtrl = require('../controllers/comments');
+
 // Implémentation des différentes routes des posts avec, pour chaque route, authentification et configuration de la logique métier appropriée:
 
 // Renvoie le tableau de tous les posts dans la base de données 
