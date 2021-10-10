@@ -3,16 +3,7 @@
     <div class="d-flex align-items-center mt-3">      
       <b-form class="w-100" @submit="addComment">
         <b-form-group>
-          <!-- <b-form-textarea
-            :id="`comment-area-${post.id}`"
-            v-model="content"
-            @keydown.enter.exact.prevent
-            @keyup.enter.exact="addComment"
-            @keydown.enter.shift.exact="newline"
-            class="comment-area border-0"
-            placeholder="Écrivez un commentaire ici..."
-            aria-label="Écrire un commentaire"
-          > -->
+          
           <b-form-textarea
             v-model="content"
             @keydown.enter.exact.prevent
@@ -51,7 +42,7 @@ export default {
           .post(`http://localhost:3000/api/posts/${this.post.id}/comments`,          
             {
             content: this.content,
-            userId: this.$store.state.userInfos.id
+            userId: this.$store.state.userInfos.userId
             },
             {
             headers: {
@@ -61,14 +52,12 @@ export default {
           .then(response => {
             if (response) {
               console.log(response);
-              // window.location.reload();
+              window.location.reload();
             }
           })
           .catch(error => (this.msgError = error));
-    },
-    // newline () {
-    //   this.content = `${this.content}\n`
-    // }
+    }
+    
   }
 }
 </script>

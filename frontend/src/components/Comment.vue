@@ -42,6 +42,7 @@ export default {
   },
   data () {
     return {
+      // content: ''
     }
   },
   methods: {
@@ -50,7 +51,7 @@ export default {
       axios
           .put(`http://localhost:3000/api/posts/${this.post.id}/comments/${this.comment.id}`,          
             {
-            content: this.content,
+            content: this.comment.content,
             // userId: this.$store.state.userInfos.id
             },
             {
@@ -61,7 +62,7 @@ export default {
           .then(response => {
             if (response) {
               console.log(response);
-              // window.location.reload();
+              window.location.reload();
             }
           })
           .catch(error => (this.msgError = error));

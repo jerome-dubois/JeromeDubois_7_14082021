@@ -2,7 +2,7 @@
   <div>
        
     <button
-      v-if="(comment.userId == userInfos.id) || (userInfos.admin == 1) || (userInfos.admin == 2)"
+      v-if="(comment.userId == userInfos.userId) || (comment.userId == userInfos.id) || (userInfos.admin == 1) || (userInfos.admin == 2)"
       class="modify-button"
       @click="deleteComment"
     >   
