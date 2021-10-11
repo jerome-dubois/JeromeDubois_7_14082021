@@ -80,7 +80,7 @@ export default {
       })     
       .then(
         function () {
-        self.$router.push('/account');
+        self.$router.push('/home');
         },
         function (error) {
         console.log(error);
